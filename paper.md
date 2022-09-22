@@ -215,11 +215,7 @@ scatter plot plus mesh can be quite cumbersome. The example
  highlights that the one written with Sciris is much more succinct and
  readable:
 
-![Comparison of functionally identical script without Sciris (left) and with Sciris (right).\label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
-
-
-![Output of the script written with Sciris in Fig.\autoref{fig:showcase-code}.\label{fig:showcase-output} ](figures/sciris-showcase-output.png){ width=100% }
-
+![Comparison of functionally identical script without Sciris (left) and with Sciris (right). The resulting plot is shown below. \label{fig:showcase-code}](figures/sciris-showcase-code-and-ouput.png){ width=100% }
 
 
 # Overview
