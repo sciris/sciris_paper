@@ -68,34 +68,37 @@ bibliography: paper.bib
 ---
 
 # Summary
+
 Sciris is a cohesive collection of tools that enables an easy and simple
 interaction with foundational libraries from the scientific Python ecosytem
-such as Numpy, Scipy, and Matplotlib, as well as with libraries with broader
-scope such as multiprocessing and pickle. Sciris purpose is the facilitation
-and acceleration of the process to develeop and deliver easy-to-use
-domain-specific scientific software. This has been achieved by simplifing the
-interfaces of frequently used class- and methods-based functionality that is
-essential for the of robust software applications but may divert the focus
-from the actual problem to be solved. For instance, some of Sciris key
-features include: ensuring consistent dictionary, list, and array types
-(e.g., this would enable users to provide inputs to a class or method as
-either lists or arrays); referencing ordered dictionary elements by index;
-handling and (re)casting dates and times (e.g., allowing users to provide
-either a date string or a datetime object); saving and loading files and
-objects; and running operations in parallel. Sciris makes writing scientific
-code in Python faster, more pleasant and more readable for a diverse, non-specialist audience. This means that with Sciris users can get more done with less code,
-without the need to reinvent the wheel, and spend less time looking things up
-on StackOverflow (or the other 20+ tabs with the documentation of every
-single library your new application is built upon). Further, Sciris offers an
-extension to build webapps for in Python akin to R's Shiny (ref): ScirisWeb.
-In contrast to Plotly Dash (ref) and Streamlit (ref), which have limited
-options for customization, ScirisWeb is modular, so users have control over
-which subset of modules to use for which aspects of any project. 
+(e.g., `numpy`, `scipy`, and `matplotlib`), as well as with libraries with
+broader scope such as `multiprocessing` and `pickle`. Sciris purpose is the
+facilitation and acceleration of the development and delivery process of
+easy-to-use domain-specific scientific software. This has been achieved by
+creating classes and methods that simplify interfaces to frequently used
+supporting functionality,  which is essential for the development of robust
+software applications, but may divert the focus from the actual problem to be
+solved. Some of Sciris key features include: ensuring consistent dictionary,
+list, and array types(e.g., this would enable users to provide inputs to a
+class or method as either lists or arrays); enabling referencing ordered
+dictionary elements by index; simplifying datetime arithmetic by allowing
+users to provide either a date string or a datetime object; simplifying the
+saving and loading of files and complex objects; and, simplifying the
+parallelisation of common operations. Sciris makes writing scientific code in
+Python faster, more pleasant and more readable for a diverse non-specialist
+audiences. This means that with Sciris users can get more done with less
+code, without the need to reinvent the wheel, and spend less time looking
+things up on StackOverflow (or the other 20+ tabs with the documentation of
+every single library your new application is built upon). Further, Sciris
+offers an extension to build webapps for in Python: ScirisWeb. In contrast to
+Plotly Dash (ref) and Streamlit (ref), which have limited options for
+customization, ScirisWeb is modular, so users have control over which subset
+of modules to use for which aspects of any project. 
 
-The name Sciris, the combination of Scientific + Iris (Greek word for
-"rainbow"), thus honours the wide-spectrum and diversity of complex yet
-low-level API resources required in the development scientific computing
-applications.
+The name Sciris, a combination of Scientific + Iris (Greek word for
+"rainbow"), thus honours the wide spectrum and diversity of commonly done
+ scientific tasks, as well as the well established low-level interfacing
+ libraries required in the development of scientific computing applications.
 
 
 # Statement of need
