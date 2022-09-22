@@ -84,7 +84,7 @@ dictionary elements by index; simplifying datetime arithmetic by allowing
 users to provide either a date string or a datetime object; simplifying the
 saving and loading of files and complex objects; and, simplifying the
 parallelisation of common operations. Sciris makes writing scientific code in
-Python faster, more pleasant and more readable for a diverse non-specialist
+Python faster, more pleasant and more readable for diverse non-specialist
 audiences. This means that with Sciris users can get more done with less
 code, without the need to reinvent the wheel, and spend less time looking
 things up on StackOverflow (or the other 20+ tabs with the documentation of
@@ -101,72 +101,107 @@ The name Sciris, a combination of Scientific + Iris (Greek word for
 
 
 # Statement of need
-<!-- TODO: rearrange paragraphs, remove overall repetition and move some paras to new section;
-  Reduce this section by about 50% of its current length (in pdf format)
+<!-- 
+  Maybe reduce this section.
  -->
 
 With the increasing availability of large volumes of data and computing
 resources, scientists across multiple fields of research have been able to
 tackle increasingly complex problems. But to harness those resources, using
 and developing domain-specific software have become ubiquitous activities in
-scientific projects. 
-
-Commensurate with the complexity of problems, these software-related
+scientific projects. Commensurate with the complexity of problems, these software-related
 activities have also become increasingly complex, creating a steep learning
 curve, especially for scientists without extensive computer programming
-literacy [@burden-codereview]. 
+literacy, and increasing the burden of code review [@burden-codereview]. 
 
-<!-- NOTE: maybe emphasise the fact that at least in research/academic environments the proportion of 
-single developer projects is probably the most common scenario, thus Sciris reduces a lot of development overhead for individuals and/or small teams. There's also an inclination to reinvent the wheel, but that's a behavioural issue. 
+<!-- NOTE: find a paper of papers where they do a survey of the state of scientific code production, to justify the 
+  "large fraction"
  -->
-The current reality is that any scientific workflow (e.g., either a full cycle
-in the development of a new software library, or in the execution of a
-one-off individual analysis) very often relies on multiple codebases,
-including but not limited to: low-level libraries, domain-specific
-open-source software, self-developed and/or inherited swiss-army-knife
-toolboxes -- whose original developer may or may not be around to pass on
-undocumented wisdom. Several scientific communities have adopted
-collaborative, community-driven, open-source software projects due to the
-significant savings in development costs and increases in code quality that
-they afford [@kerr2019epidemiology] (e.g., astropy
+The current reality of a large fraction of scientific code production is that any workflow
+(e.g., either a full cycle in the development of a new software library, or
+in the execution of a one-off individual analysis) very often relies on
+multiple codebases, including but not limited to: low-level libraries,
+domain-specific open-source software, self-developed and/or inherited
+swiss-army-knife toolboxes -- whose original developer may or may not be
+around to pass on undocumented wisdom. Several scientific communities have
+adopted collaborative, community-driven, open-source software projects due to
+the significant savings in development costs and increases in code quality
+that they afford [@kerr2019epidemiology] (e.g., astropy
 [@robitaille2013astropy], nilearn [@nilearn] and fmriprep
-[@esteban2019fmriprep]). Despite this progress there remains a pervasive
-inclination to reinvent the wheel among academics. 
-
-Scientific software differs from commercial production software in that it is
-a crucial component in the elaboration of scientific conclusions. This that
-scientific software code in computational science should be: re-runnable,
-repeatable, reproducible, reusable, and replicable [@benureau2018re]. 
+[@esteban2019fmriprep]). Despite this progress, a large fraction of
+scientific software efforts remain a solo adventure, leading to an increase
+in the proliferation of tools that reinvent the wheel. 
 
 <!-- NOTE: astropy and nilearn get a mention because here of their scale e
 and the size of the core developer team. There are other libraries such as seaborn and pingouin that are also
 open-source projects, but still are heavily developed and maintained by a single developer -->
 
 
-Sciris traces its origins to 2014 to support development of the Optima suite
-of models (ref). We kept encountering the same issues and inconveniences over
-and over while building scientific webapps, and began collecting the tools we
-used to overcome these issues into a shared library. While Python was and
-still is considered an easy-to-use language for beginners(ref), the
-motivation that shaped Sciris evolution was to further lower the barriers to
-access, interact with, and orchestrate the numerous supporting libraries we
-were using.
+Scientific software differs from commercial production software in that it is
+a crucial component in the elaboration of scientific conclusions, and as such
+it should be: re-runnable, repeatable, reproducible, reusable, and
+replicable [@benureau2018re]. A key aspect to ensure these properties is
+readability of tutorials, documentation and especially of code itself. But it
+is essential to note that programming abstractions may not be a great way to
+express human-readable scientific ideas, which is what scientific code should
+convey (e.g., one would not put the user manual of a spectrophotometer under
+the Methods section of a report). 
 
-Our endeavor paid off in early 2020 when the combination of brevity and
-simplicity provided by Sciris was crucial in the faster-than-average
-development of Covasim[@kerr2021covasim; @kerr2022python], and further
-enabled Covasim to become one of the most widely adopted COVID models, used
-by students, researchers and policy makers alike. In addition to Covasim,
-Sciris is currently used in a number of scientific applications
+There are several notable libraries that follow this "simplifying interfaces"
+approach to let researchers focus their time an efforts in solving problems,
+prototyping solutions, deploying applications and educating their
+communities. Some of these include PyTorch, seaborn
+[@waskom2021seaborn], DataLad[@alchenko2021datalad], pingouin
+[@vallat2018pingouin], Mayavi [@ramachandran2011mayavi] and PyVista
+[@sullivan2019pyvista], just to name a few though there are many more. For
+instance, PyTorch made models easier to write compared to TensorFlow. It is
+used in production environments but its remains most popular in academic and
+in research environments [@pytorch-research]. 
+
+However, among the already existing libraries we did not encountered one that
+would  handle the more complex semantics of, for instance powerful
+containers, or parallelisation of trivial data-intensive operations.
+
+Sciris traces its origins to 2014 to support development of the Optima suite
+of models [@kerr2015optima]. We kept encountering the same issues and
+inconveniences over and over while building scientific webapps, and began
+collecting the tools we used to overcome these issues into a shared library.
+While Python was and still is considered an easy-to-use language for
+beginners, the motivation that shaped Sciris evolution was to further lower
+the barriers to access, interact with, and orchestrate the numerous
+supporting libraries we were using. We knew our endeavor paid off when in
+early 2020 the combination of brevity and simplicity provided by Sciris was
+crucial in (i) the faster-than-average development of Covasim
+[@kerr2021covasim; @kerr2022python], and (ii) enabling further Covasim to
+become one of the most widely adopted COVID models, used by students,
+researchers and policy makers alike. In addition to Covasim, Sciris is
+currently used in a number of scientific applications
 [@kedziora2019cascade; @atomica; @fraser2021using] and since 2022 has been
 designated as a critical project on the Python Pakacage Index (PyPI).
 
-<!-- NOTE: at the momemnt the paras below sound disconnected from the rests
+The current stable version of Sciris includes implementations of heavily used
+code patterns and abstractions we have identified over the last 8 years, and
+that we have demonstrated facilitate the development and deployment of
+complex domain-specific scientific applications regardless of their scope and
+scale, and further enables non-specialist audiences to interact with these
+complex applications.
+
+Sciris "stands on the shoulders of giants", and as
+such is not intended as a replacement of those, bur rather as a strongly
+idiomatic scientific crucible that will result in a more effective and
+sustainable development process for solo-developers and teams alike
+(including increasing the longevity [@perkel2020challenge] of new scientific
+libraries). Sciris remains in active development and maintenance. We note
+that ScirisWeb, while functional, is still in beta development.
+
+
+<!-- NOTE: mention other libraries and how Sciris compares to them
  -->
-Sciris now includes implementations of heavily used code patterns and
-abstractions we have identified over the last 8 years, and that we have
-demonstrated facilitate the development and deployment of domain-specific
-scientific applications regardless of their scope and scale. 
+
+
+<!-- NOTE: maybe cite a paper that discussed the number of scientific toolboxes that eventually die. 
+Can help with the argument that Sciris may help prolong the longevity of scientific software.  -->
+
 
 <!-- This may sound paradoxical -->
 <!-- Sciris is domain-specific in the sense that it has been mostly developed by
@@ -174,22 +209,6 @@ researchers to be used by researchers. However, within the scope of scientific
 software Sciris is domain-general because it can be used to develop
 libraries for different research domains such as physics,
 neuroscience or epidemiology.  -->
-
-<!-- NOTE: mention other libraries and how Sciris compares to them
- -->
-There are several libraries that follow this "simplifying interactions" principle to let
-researchers focus their time an efforts in solving problems, prototyping
-solutions, deploying applications and educating their communities. Some
-examples include PyTorch, seaborn, datalad, vispy, good old Mayavi.
-PyTorch made models easier to write compared to TensorFlow. It is used in production environments but its remains most popular in academic and in research environments [@pytorch-research]. 
-
-<!-- NOTE: Sciris is a crucible (crisol in Spanish, which sounds much nicer imo)
- -->
-
-<!-- NOTE: maybe cite a paper that discussed the number of scientific toolboxes that eventually die. 
-Can help with the argument that Sciris may help prolong the longevity of scientific software.  -->
-
-Our hope is that in using Sciris, researchers who routinely write and develop code will delegate the hard semantic bits to Sciris, and will be able to focus on the specific research problem they want to solve. 
 
 
 # Example
@@ -204,10 +223,11 @@ for multiple levels of noise, and save these results in separate files. At a
 later stage, we would like to load the independent files, "glue" them
 together to reconstruct a surface embedded in 3D by interpolating the random
 samples; and finally, we want to plot the random points and surface together.
-Parallelizing the repeated draws and the 3D scatter plot plus mesh can be
-quite cumbersome. The example \autoref{fig:showcase-code} presents two
-functionally identical scripts and highlights that the one written with
-Sciris is much more succinct and readable:
+Parallelizing the repeated draws and customizing the axes to render the 3D
+scatter plot plus mesh can be quite cumbersome. The example 
+\autoref{fig:showcase-code} presents two functionally identical scripts and
+highlights that the one written with Sciris is much more succinct and
+readable:
 
 ![Comparison of functionally identical script without Sciris (left) and with Sciris (right).\label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
 
@@ -223,12 +243,7 @@ simplified interfaces to datetime arithmetic, and to limiting the execution
 of a program based on resource usage irrespective of the operating system or
 computational environment where the application is executed. 
 
-Sciris was built on the shoulders of giants like Numpy and Matplotlib, and as
-such is not intended as a replacement of those, bur rather as a strongly
-idiomatic scientific crucible that will result in a more effective and sustainable 
-development process for solo-developers and teams alike (including increasing the longevity of new
-scientific libraries). Sciris remains in active development and maintenance.
-We note that ScirisWeb, while functional, is still in beta development.
+
 
 ScirisWeb provides a ''just works'' solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb  also enables users to use a a React (ref) frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together.
 
