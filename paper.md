@@ -68,7 +68,6 @@ bibliography: paper.bib
 ---
 
 # Summary
-
 Sciris is a cohesive collection of tools that enables an easy and simple
 interaction with foundational libraries from the scientific Python ecosytem
 (e.g., `numpy`, `scipy`, and `matplotlib`), as well as with libraries with
@@ -109,13 +108,13 @@ The name Sciris, a combination of Scientific + Iris (Greek word for
 With the increasing availability of large volumes of data and computing
 resources, scientists across multiple fields of research have been able to
 tackle increasingly complex problems. But to harness those resources, using
-and developing domain-specific software has become ubiquitous activities in
+and developing domain-specific software have become ubiquitous activities in
 scientific projects. 
 
 Commensurate with the complexity of problems, these software-related
 activities have also become increasingly complex, creating a steep learning
 curve, especially for scientists without extensive computer programming
-literacy. 
+literacy [@burden-codereview]. 
 
 <!-- NOTE: maybe emphasise the fact that at least in research/academic environments the proportion of 
 single developer projects is probably the most common scenario, thus Sciris reduces a lot of development overhead for individuals and/or small teams. There's also an inclination to reinvent the wheel, but that's a behavioural issue. 
@@ -129,7 +128,20 @@ toolboxes -- whose original developer may or may not be around to pass on
 undocumented wisdom. Several scientific communities have adopted
 collaborative, community-driven, open-source software projects due to the
 significant savings in development costs and increases in code quality that
-they afford [@kerr2019epidemiology] (e.g., nilearn [@nilearn] and fmriprep [@esteban2019fmriprep]). Despite this progress there remains a pervasive inclination to reinvent the wheel among academics. 
+they afford [@kerr2019epidemiology] (e.g., astropy
+[@robitaille2013astropy], nilearn [@nilearn] and fmriprep
+[@esteban2019fmriprep]). Despite this progress there remains a pervasive
+inclination to reinvent the wheel among academics. 
+
+Scientific software differs from commercial production software in that it is
+a crucial component in the elaboration of scientific conclusions. This that
+scientific software code in computational science should be: re-runnable,
+repeatable, reproducible, reusable, and replicable [@benureau2018re]. 
+
+<!-- NOTE: astropy and nilearn get a mention because here of their scale e
+and the size of the core developer team. There are other libraries such as seaborn and pingouin that are also
+open-source projects, but still are heavily developed and maintained by a single developer -->
+
 
 Sciris traces its origins to 2014 to support development of the Optima suite
 of models (ref). We kept encountering the same issues and inconveniences over
@@ -137,7 +149,8 @@ and over while building scientific webapps, and began collecting the tools we
 used to overcome these issues into a shared library. While Python was and
 still is considered an easy-to-use language for beginners(ref), the
 motivation that shaped Sciris evolution was to further lower the barriers to
-access, interact with, and orchestrate the numerous supporting libraries we were using.
+access, interact with, and orchestrate the numerous supporting libraries we
+were using.
 
 Our endeavor paid off in early 2020 when the combination of brevity and
 simplicity provided by Sciris was crucial in the faster-than-average
@@ -169,16 +182,6 @@ researchers focus their time an efforts in solving problems, prototyping
 solutions, deploying applications and educating their communities. Some
 examples include PyTorch, seaborn, datalad, vispy, good old Mayavi.
 PyTorch made models easier to write compared to TensorFlow. It is used in production environments but its remains most popular in academic and in research environments [@pytorch-research]. 
- 
-<!-- (perhaps mention a few of the libraries/dependencies) -->
-The Sciris library offers a coordinating interface to multiple well
-established and highly flexible Python libraries, yet their simultaneous use
-in a single simple script to (i) parallelise the sampling of random numbers
-following a user-defined distribution embedded in 3D space, (ii) interpolate
-the points to approximation a surface, and (iii) finally plot both the points
-as a 3D scatter and the mesh can be quite cumbersome, and the
-research-specific code (i.e., user-defined random sampler) may be obscured by
-the "supporting" code required to parallelise operations and plot the data. 
 
 <!-- NOTE: Sciris is a crucible (crisol in Spanish, which sounds much nicer imo)
  -->
@@ -189,18 +192,27 @@ Can help with the argument that Sciris may help prolong the longevity of scienti
 Our hope is that in using Sciris, researchers who routinely write and develop code will delegate the hard semantic bits to Sciris, and will be able to focus on the specific research problem they want to solve. 
 
 
-# Usage
-The example \autoref{fig:showcase-code} presents two functionally identical scripts and highlights that the one written with Sciris is much more succinct and readable:
+# Example
+<!-- (perhaps mention a few of the libraries/dependencies) -->
+The Sciris library offers a coordinating interface to multiple well
+established and highly flexible Python libraries, yet their simultaneous use
+in a single simple script may obscure the key logic of the scientific problem. 
 
-
-<!-- Example: something as simple as providing an alias
-moving average, rolling mean, rolling average, convolution  -->
-
+For instance let us imagine that we want to randomly sample numbers from a
+user-defined smooth function. In addition, we want to repeatedly draw numbers
+for multiple levels of noise, and save these results in separate files. At a
+later stage, we would like to load the independent files, "glue" them
+together to reconstruct a surface embedded in 3D by interpolating the random
+samples; and finally, we want to plot the random points and surface together.
+Parallelizing the repeated draws and the 3D scatter plot plus mesh can be
+quite cumbersome. The example \autoref{fig:showcase-code} presents two
+functionally identical scripts and highlights that the one written with
+Sciris is much more succinct and readable:
 
 ![Comparison of functionally identical script without Sciris (left) and with Sciris (right).\label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
 
 
-![Output of the script written with Sciris in Fig.\autoref{fig:showcase-code}.\label{fig:showcase-output} ](figures/sciris-showcase-output.png){ width=65% }
+![Output of the script written with Sciris in Fig.\autoref{fig:showcase-code}.\label{fig:showcase-output} ](figures/sciris-showcase-output.png){ width=100% }
 
 
 
@@ -222,6 +234,11 @@ ScirisWeb provides a ''just works'' solution using [Vuejs](https://vuejs.org/) f
 
 
 ![Block diagram of the main functional components in Sciris.\label{fig:block-diagram}](figures/sciris-block-diagram-00.png){ width=100% }
+
+
+
+<!-- Example: something as simple as providing an alias
+moving average, rolling mean, rolling average, convolution  -->
 
 
 # Acknowledgements
