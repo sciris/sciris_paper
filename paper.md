@@ -152,11 +152,12 @@ approach to let researchers focus their time an efforts in solving problems,
 prototyping solutions, deploying applications and educating their
 communities. Some of these include PyTorch, seaborn
 [@waskom2021seaborn], DataLad [@halchenko2021datalad], pingouin
-[@vallat2018pingouin], Mayavi [@ramachandran2011mayavi] and PyVista
-[@sullivan2019pyvista], just to name a few though there are many more. For
-instance, PyTorch made models easier to write compared to TensorFlow. It is
-used in production environments but its remains most popular in academic and
-in research environments [@pytorch-research]. 
+[@vallat2018pingouin], hypothesis [@maciver2019hypothesis], Mayavi
+[@ramachandran2011mayavi] and PyVista[@sullivan2019pyvista], just to name a
+few though there are many more. For instance, PyTorch made models easier to
+write compared to TensorFlow. It is used in production environments but its
+remains most popular in academic and in research environments
+[@pytorch-research]. 
 
 However, among the already existing libraries we did not encountered one that
 would  handle the more complex semantics of, for instance powerful
@@ -176,8 +177,9 @@ crucial in (i) the faster-than-average development of Covasim
 become one of the most widely adopted COVID models, used by students,
 researchers and policy makers alike. In addition to Covasim, Sciris is
 currently used in a number of scientific applications
-[@kedziora2019cascade; @atomica; @fraser2021using] and since 2022 has been
-designated as a critical project on the Python Pakacage Index (PyPI).
+[@kedziora2019cascade; @atomica; @fraser2021using; @hiptool; @synthpops; @parestlib]
+and since 2022 has been designated as a critical project on the Python
+Pakacage Index (PyPI).
 
 The current stable version of Sciris includes implementations of heavily used
 code patterns and abstractions we have identified over the last 8 years, and
