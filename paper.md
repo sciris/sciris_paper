@@ -165,7 +165,7 @@ scientific webapps, and so began collecting the tools we used to overcome
 them into a shared library. While Python was and still is considered an easy-to-use language for beginners, the motivation that shaped Sciris' evolution was to further lower the barriers to access, interact with, and orchestrate the numerous
 supporting libraries we were using. 
 
-We knew our endeavor paid off when in early 2020 the combination of brevity
+We confirmed our endeavor had paid off when in early 2020 the combination of brevity
 and simplicity provided by Sciris was crucial in: (i) the faster-than-average
 development of Covasim [@kerr2021covasim; @kerr2022python]; and (ii) enabling
 Covasim to become one of the most widely adopted COVID models, used by
