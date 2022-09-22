@@ -145,13 +145,13 @@ readability of tutorials, documentation and especially of code itself. But it
 is essential to note that programming abstractions may not be a great way to
 express human-readable scientific ideas, which is what scientific code should
 convey (e.g., one would not put the user manual of a spectrophotometer under
-the Methods section of a report). 
+as part of a report on protein analysis). 
 
 There are several notable libraries that follow this "simplifying interfaces"
 approach to let researchers focus their time an efforts in solving problems,
 prototyping solutions, deploying applications and educating their
 communities. Some of these include PyTorch, seaborn
-[@waskom2021seaborn], DataLad[@alchenko2021datalad], pingouin
+[@waskom2021seaborn], DataLad [@halchenko2021datalad], pingouin
 [@vallat2018pingouin], Mayavi [@ramachandran2011mayavi] and PyVista
 [@sullivan2019pyvista], just to name a few though there are many more. For
 instance, PyTorch made models easier to write compared to TensorFlow. It is
@@ -160,7 +160,7 @@ in research environments [@pytorch-research].
 
 However, among the already existing libraries we did not encountered one that
 would  handle the more complex semantics of, for instance powerful
-containers, or parallelisation of trivial data-intensive operations.
+containers, or parallelisation of trivial yet data-intensive operations.
 
 Sciris traces its origins to 2014 to support development of the Optima suite
 of models [@kerr2015optima]. We kept encountering the same issues and
@@ -184,15 +184,13 @@ code patterns and abstractions we have identified over the last 8 years, and
 that we have demonstrated facilitate the development and deployment of
 complex domain-specific scientific applications regardless of their scope and
 scale, and further enables non-specialist audiences to interact with these
-complex applications.
-
-Sciris "stands on the shoulders of giants", and as
-such is not intended as a replacement of those, bur rather as a strongly
-idiomatic scientific crucible that will result in a more effective and
-sustainable development process for solo-developers and teams alike
-(including increasing the longevity [@perkel2020challenge] of new scientific
-libraries). Sciris remains in active development and maintenance. We note
-that ScirisWeb, while functional, is still in beta development.
+complex applications. Sciris "stands on the shoulders of giants", and as such
+is not intended as a replacement of those, bur rather as a strongly idiomatic
+scientific crucible that will result in a more effective and sustainable
+development process for solo-developers and teams alike(including increasing
+the longevity [@perkel2020challenge] of new scientific libraries). Sciris
+remains in active development and maintenance. We note that ScirisWeb, while
+functional, is still in beta development.
 
 
 <!-- NOTE: mention other libraries and how Sciris compares to them
