@@ -90,8 +90,7 @@ need to reinvent the wheel, and spend less time looking things up on
 StackOverflow (or the other 20+ tabs with the documentation of every single
 library your new application is built upon). Further, Sciris offers an
 extension to build webapps in Python: ScirisWeb. In contrast to
-[Plotly's Dash](https://github.com/plotly/dash) and [Streamlit]
-(https://streamlit.io/), which have limited options for customization,
+[Plotly's Dash](https://github.com/plotly/dash) and [Streamlit](https://streamlit.io/), which have limited options for customization,
 ScirisWeb is modular, so users can control which subset they use for a
 project. 
 
@@ -261,73 +260,115 @@ functional modules of Sciris.
 
 <!-- NOTE: current size of width=75% gives the perfect layout to fit everything in 6 pages
  -->
- ![Block diagram of the main functional components in Sciris.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=75% }
+ ![Block diagram of the Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly done in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=72% }
 
 <!-- NOTE: present some key features (a subset of the docs)  
  -->
 
 ### Containers 
-One of the key features in Sciris is `odict`, a flexible container of an associative array representing the best-of-all-worlds across lists, dictionaries, and numeric arrays. An ordered dictionary, similar to the OrderedDict class from `collections`, but supports list methods like integer indexing, key slicing, and item inserting. It can also replicate defaultdict behavior via the `defaultdict` argument.
+One of the key features in Sciris is `odict`, a flexible container representing an associative array with the best-of-all-worlds across lists, dictionaries, and numeric arrays. This is based on `OrderedDict` from [`collections`](https://docs.python.org/3/library/collections.html), but supports list methods like integer indexing, key slicing, and item inserting.
 
 ```Python
-my_odict = sc.odict(foo=[1,2,3], bar=[4,5,6]) #
-my_odict['foo'] == my_odict[0]                # Access by key or by index
-my_odict[:].sum() == 21                       # Slices returned as numpy arrays by default
-for i, key, value in my_odict.enumitems():    # Additional methods for iteration
-    print(f'Item {i} is named {key} and has value {value}')
+> my_odict = sc.odict(foo=[1,2,3], bar=[4,5,6]) 
+> my_odict['foo'] == my_odict[0]                
+> my_odict[:].sum() == 21                       
+> for i, key, value in my_odict.enumitems():    
+     print(f'Item {i} is named {key} and has value {value}')
 ```
 
-The function `sc.mergedicts`, by default, skips things that are not dictionaries (e.g., `None`), and allows keys to be set multiple times. The first dictionary supplied will be used for the output type (e.g. if the first dictionary is an `sc.odict`, an `sc.odict` will be returned). This function is useful for cases such as function (keyword) arguments where the default is simply set as `None` but later on a dictionary will be needed.
-
 ### Container methods 
+
+`sc.promotetolist` developed so user-defined functions can handle inputs like ``'a'``  or ``['a', 'b']``. In other words, if an argument
+can either be a single thing (e.g., a single dictionary key) or a list (e.g., a list of dictionary keys), this function can be used to do the conversion,
+so it is always safe to iterate over the output.
+
+`sc.mergedicts`, by default, skips things that are not dictionaries (e.g., `None`), and allows keys to be set multiple times. The first dictionary supplied will be used for the output type (e.g., if the first dictionary is an `sc.odict`, an `sc.odict` will be returned). This function is useful for cases such as function (keyword) arguments where the default is simply set as `None` but later on a dictionary will be needed.
+
+`sc.flattendict`, flattens a nested dictionary 
+
 ```Python
-sc.flattendict({'a':{'b':1,'c':{'d':2,'e':3}}})
+> sc.flattendict({'a':{'b':1,'c':{'d':2,'e':3}}})
 {('a', 'b'): 1, ('a', 'c', 'd'): 2, ('a', 'c', 'e'): 3}
 
 
-sc.flattendict({'a':{'b':1,'c':{'d':2,'e':3}}}, sep='_')
+> sc.flattendict({'a':{'b':1,'c':{'d':2,'e':3}}}, sep='_')
 {'a_b': 1, 'a_c_d': 2, 'a_c_e': 3}
 ```
 
+### Prettify object/data representations (or how to make stuff more human-readable)
 
-The function `sc.promotetolist` was developed so user-defined functions can
-handle inputs like ``'a'``  or ``['a', 'b']``. In other words, if an argument
-can either be a single thing (e.g., a single dictionary key) or a list
-(e.g., a list of dict keys), this function can be used to do the conversion,
-so it is always safe to iterate over the output.
+`sc.prettyobj` is a class, used to produce a pretty representation for objects, instead of just showing the type and memory pointer (Python's default for objects). 
+```Python
+> myobj = sc.prettyobj()
+> myobj.a = 3
+> myobj.b = {'a':6}
+> print(myobj)
+<sciris.sc_utils.prettyobj at 0x7ffa1e243910>
+————————————————————————————————————————————————————————————
+a: 3
+b: {'a': 6}
+————————————————————————————————————————————————————————————
+```
+This class can also be used as the base class for custom
+classes.
 
-### Prettify data/objects representations (or how to make stuff more human-readable)
-Pretty object
+```Python
+> class MyObj(sc.prettyobj):
+>
+>     def __init__(self, a, b):
+>         self.a = a
+>         self.b = b
+>
+>     def mult(self):
+>         return self.a * self.b
 
+> myobj = MyObj(a=4, b=6)
+> print(myobj)
+<__main__.MyObj at 0x7fd9acd96c10>
+————————————————————————————————————————————————————————————
+Methods:
+  mult()
+————————————————————————————————————————————————————————————
+a: 4
+b: 6
+————————————————————————————————————————————————————————————
+```
 
-### Plotting  
-vectocolor
-arraycolor
-orderlegend
+### Don't paint it black  
+`sc.vectocolor` converts a 1D array of N values into an Nx3 array
+of RGB values according to the current colormap. `sc.arraycolor` extends this functionality to multidimensional arrays. 
 
+### Parallelization
+We have found that one frequently hurdle scientists face is to parallelization. Sciris 
+provides `sc.parallelize`, which most simply, acts as an shortcut for using `multiprocess.Pool()`. However, importantly this function can also iterate over more complex arguments. It can either use a fixed number of CPUs or allocate dynamically based on load (`sc.loadbalancer`). Users can also specify a fixed number of CPUs to be used. The example below shows three different equivalent ways to iterate over multiple arguments:
+```Python
+> def f(x,y):
+>     return x*y
 
+> results1 = sc.parallelize(func=f, iterarg=[(1,2),(2,3),(3,4)])
+> results2 = sc.parallelize(func=f, iterkwargs={'x':[1,2,3], 'y':[2,3,4]})
+> results3 = sc.parallelize(func=f, iterkwargs=[{'x':1, 'y':2}, {'x':2, 'y':3}, {'x':3, 'y':4}])
 
-### Math and optimization functions
-Adaptive stochastic descent (ASD) optimization algorithm
-Sciris provides an optimization algorithm that has been designed to replicate
-the essential aspects of manual parameter fitting in an automated way.
-Specifically, ASD uses simple principles to form probabilistic assumptions
-about (a) which parameters have the greatest effect on the objective
-function, and (b) optimal step sizes for each parameter
-[@kerr2018optimization].
+> assert results1 == results2 == results3
+```
 
-Date time arithmetic
+### Math functionality
+`sc.findinds` matches even if two things are not exactly equal 
+due to differences in numeric type (e.g., floats vs. integers). 
+If called with one argument, finds nonzero values. Called with two arguments,
+check for equality using `eps`. The code shown below produces the same result as calling `np.nonzero(np.isclose(arr, val))[0].`
 
-### Process and resource management
+```Python
+> sc.findinds([2,3,6,3], 3) 
+array([1,3])
+```
 
-mem, ram managments
-
+`sc.asd`: Sciris provides an implementation of the optimization algorithm Adaptive Stochastic dDscent (ASD) described in [@kerr2018optimization], and that has been designed to replicate the essential aspects of manual parameter fitting in an automated way. Specifically, ASD uses simple principles to form probabilistic assumptions about (a) which parameters have the greatest effect on the objective function, and(b) optimal
+step sizes for each parameter.
 
 ### ScirisWeb
 ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb  also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together. We note
 that ScirisWeb, while functional, is still in beta development.
-
-
 
 
 <!-- NOTE: Take on Cliff's Big Software paper in 2019
