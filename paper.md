@@ -140,21 +140,21 @@ readability of tutorials, documentation and especially of code itself. **But
 it is essential to note that low level programming abstractions may not be a great way
 to express human-readable scientific ideas or solutions, which is what scientific code
 should convey**. For instance, one of the reasons PyTorch has become popular
-in academic and in research environments is its success in making models
+in academic and research environments is its success in making models
 easier to write compared to TensorFlow [@pytorch-research]. 
 
 The need for libraries that provide "simplifying interfaces" for research
 applications is reflected by the development of various notable libraries in
 scientific Python ecosystem, that have enabled researchers focus their time
 and efforts on solving problems, prototyping solutions, deploying
-applications and educating their communities.Some of these include PyTorch,
+applications and educating their communities. Some of these include PyTorch,
 seaborn[@waskom2021seaborn], DataLad [@halchenko2021datalad], pingouin
 [@vallat2018pingouin], hypothesis [@maciver2019hypothesis], Mayavi
 [@ramachandran2011mayavi] and PyVista [@sullivan2019pyvista], just to name a
 few though there are many more. 
 
 Sciris itself traces its origins to 2014, initially created to support
-development of the Optima suite of models[@kerr2015optima]. Among the
+development of the Optima suite of models [@kerr2015optima]. Among the
 existing libraries at the time we had not found one that simplified the
 complex semantics of powerful containers or the parallelisation of trivial
 yet data-intensive operations. We kept encountering the same
@@ -170,7 +170,7 @@ and sustainable scientific code production for solo-developers and teams
 alike, and increased longevity [@perkel2020challenge] of new scientific
 libraries. Some of the key functional aspects that Sciris provides are:
 (i) brevity through simplifying interfaces; (ii) scientific idiomaticity;
-(iii)locally scoped forgiving and strict exception handling; and,
+(iii) locally scoped forgiving and strict exception handling; and,
 (iv) management of versioning information. We expand on each of these in
 Overview.
 
@@ -215,8 +215,8 @@ higher-level types like `listlike`)
 
 <!-- (e.g., one would not include the 'how-to-assemble' manual a spectrophotometer as part of a every report on protein analysis).
  -->
-*Scientific idiomaticity*. Sciris promotes uses idiomatic function names (i.e., `sc.smooth`, `sc.findnearest`, `sc.safedivide`) so that the resulting code is as scientifically and human-readable as possible. Further, we note that some of Sciris function names are similar to Matlab's (i.e., `sc.tic` and `sc.toc`). This is 
-because there there is often a need to either translate from/to Matlab or R are, or to integrate code components written in multiple languages.
+*Scientific idiomaticity*. Sciris uses idiomatic function names (i.e., `sc.smooth`, `sc.findnearest`, `sc.safedivide`) so that the resulting code is as scientifically and human-readable as possible. Further, we note that some of Sciris function names are similar to Matlab's (i.e., `sc.tic` and `sc.toc`). This is 
+because there is often a need to either translate from/to Matlab or R, or to integrate code components written in multiple languages.
 
 *Forgiving and strict exception handling*.
 Across many complex classes and methods, Sciris uses the keyword `die`, enabling users to set a locally scoped level of strictness in the handling of exceptions. If `die=False`, Sciris is more forgiving and softly handles exceptions by using its default (opinionated) behavior. This could be simply printing a message and returning `None` so users can decide how to proceed. If `die=True`, it directly raises the corresponding exception and message. 
@@ -230,8 +230,8 @@ to compare between two version numbers with any possible combination of an
 (in)equality operator (`sc.compareversions`). 
 
 
-We confirmed our approach with Sciris had paid off when in early 2020 its
-combination of brevity and simplicity provided was crucial in: (i) the
+Our approach with Sciris was confirmed to have paid off when in early 2020 its
+combination of brevity and simplicity proved crucial in: (i) the
 faster-than-average development of Covasim
 [@kerr2021covasim; @kerr2022python]; and (ii) enabling Covasim to become one
 of the most widely adopted COVID models, used by students, researchers and
@@ -248,9 +248,9 @@ In \autoref{fig:block-diagram} we illustrate the functional modules of Sciris.
 
 ## Highlights
 Sciris provides class- and function-based implementations of common operations
-ranging parallelization to improved object representation.
-Below, we provide a selection of examples of illustrating for instance common tasks
-ranging parallelization to improved object representation. It is by no means an exhaustive description of Sciris capabilities, but further information can be found at [https://sciris.readthedocs.io](https://sciris.readthedocs.io). Documentation includes installation instructions for both [Sciris](https://github.com/sciris/sciris) and
+ranging from parallelization to improved object representation,
+below we provide a selection of examples.
+It is by no means an exhaustive description of Sciris' capabilities, but further information can be found at [https://sciris.readthedocs.io](https://sciris.readthedocs.io). Documentation includes installation instructions for both [Sciris](https://github.com/sciris/sciris) and
 [ScirisWeb](https://github.com/sciris/scirisweb); [how-to-contribute guidelines](https://sciris.readthedocs.io/en/latest/contributing.html); and [style guide](https://sciris.readthedocs.io/en/latest/style_guide.html).  
 
 <!-- NOTE: present some key features (only a subset of functions that i was immediately drawn too in Sciris)  
@@ -288,7 +288,7 @@ so it is always safe to iterate over the output.
 
 ### Prettify object/data representations (or how to make stuff more human-readable)
 
-`sc.prettyobj` is a class, used to produce a pretty representation for objects, instead of just showing the type and memory pointer (Python's default for objects). 
+`sc.prettyobj` is a class that produces a pretty representation for objects, instead of just showing the type and memory pointer (Python's default for objects). 
 ```Python
 > myobj = sc.prettyobj()
 > myobj.a = 3
@@ -330,8 +330,9 @@ b: 6
 of RGB values according to the current colormap. `sc.arraycolor` extends this functionality to multidimensional arrays. 
  -->
 ### Parallelization
-We have found that one frequently hurdle scientists face is to parallelization. Sciris 
-provides `sc.parallelize`, which most simply, acts as an shortcut for using `multiprocess.Pool()`. However, importantly this function can also iterate over more complex arguments. It can either use a fixed number of CPUs or allocate dynamically based on load (`sc.loadbalancer`). Users can also specify a fixed number of CPUs to be used. The example below shows three different equivalent ways to iterate over multiple arguments:
+We have found that one frequent hurdle scientists face is parallelization. Sciris 
+provides `sc.parallelize`, which acts as a shortcut for using `multiprocess.Pool()`. 
+Importantly, this function can also iterate over more complex arguments. It can either use a fixed number of CPUs or allocate dynamically based on load (`sc.loadbalancer`). Users can also specify a fixed number of CPUs to be used. The example below shows three different equivalent ways to iterate over multiple arguments:
 ```Python
 > def f(x,y):
 >     return x*y
@@ -356,7 +357,7 @@ check for equality using `eps`. The code shown below produces the same result as
 array([1,3])
 ```
 
-`sc.asd`: Sciris provides an implementation of the optimization algorithm Adaptive Stochastic dDscent (ASD) described in [@kerr2018optimization], and that has been designed to replicate the essential aspects of manual parameter fitting in an automated way. Specifically, ASD uses simple principles to form probabilistic assumptions about (a) which parameters have the greatest effect on the objective function, and(b) optimal
+`sc.asd`: Sciris provides an implementation of the optimization algorithm Adaptive Stochastic dDscent (ASD) described in [@kerr2018optimization], and that has been designed to replicate the essential aspects of manual parameter fitting in an automated way. Specifically, ASD uses simple principles to form probabilistic assumptions about (a) which parameters have the greatest effect on the objective function, and (b) optimal
 step sizes for each parameter.
 
 # ScirisWeb
