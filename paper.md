@@ -1,5 +1,5 @@
 ---
-title: 'Sciris: A cohesive Python library to enable efficient and sustainable development of domain-specific research applications. '
+title: 'Sciris: A Python library to enable efficient and sustainable development of domain-driven research applications. '
 tags:
   - python
   - scientific software development
@@ -166,11 +166,14 @@ the motivation that shaped Sciris' evolution was to further lower the
 barriers to access, interact with, and orchestrate the numerous supporting
 libraries we were using. 
 
-For those reasons Sciris provides tools that will result in a more
-effective and sustainable scientific code production for solo-developers and
-teams alike, and increased longevity [@perkel2020challenge] of new
-scientific libraries. Some of the key functional aspects that Sciris provides are:
-(i) brevity through simplifying interfaces; (ii) scientific idiomaticity; (iii)forgiving and strict exception handling; and, (iv) management of versioning information. We expand on each of these in Overview.
+For those reasons Sciris provides tools that will result in a more effective
+and sustainable scientific code production for solo-developers and teams
+alike, and increased longevity [@perkel2020challenge] of new scientific
+libraries. Some of the key functional aspects that Sciris provides are:
+(i) brevity through simplifying interfaces; (ii) scientific idiomaticity;
+(iii)locally scoped forgiving and strict exception handling; and,
+(iv) management of versioning information. We expand on each of these in
+Overview.
 
 # Example
 <!-- (perhaps mention a few of the libraries/dependencies) -->
@@ -201,13 +204,16 @@ these complex applications. We note that Sciris "stands on the shoulders of gian
 
 
 *Brevity through simplifying interfaces*.
+
 Sciris affords brevity to its users by encapsulating common regular patterns
 that span multiple lines of code into a function with a simple interface.
 With these functions one can succinctly express and execute (i) frequent
-plotting tasks (i.e., `sc.fig3d`, `sc.ax3d`, `sc.hex2rgb`), (ii) less
-frequent debugging tasks like pretty printing numeric arrays with up to 3
-axes(e.g., `sc.printarr`); frequent but less simple tasks like merging
-containers (e.g., `sc.mergedicts`, `sc.mergenested`, `sc.mergelists`).
+plotting tasks (i.e., `sc.fig3d`, `sc.ax3d`, `sc.hex2rgb`); (ii) less
+frequent tasks like pretty printing numeric arrays with up to 3 axes
+(e.g., `sc.printarr`) that can be useful for debugging; frequent but less
+simple tasks like merging containers (e.g., `sc.mergedicts`,
+`sc.mergenested`, `sc.mergelists`), or line-by-line memory profiling (`sc.mprofile`).
+
 Brevity is also achieved by extending functionality of well established
 objects (e.g., `OrderedDict` via `sc.odict`) or methods (e.g., `isinstance`
 via `sc.checktype` that enables the comparison of objects against
@@ -241,8 +247,7 @@ number of scientific applications
 and since 2022 has been designated as a critical project on the Python
 Package Index ([PyPI](https://pypi.org)).
 
-Documentation can be found at [https://sciris.readthedocs.io]
-(https://sciris.readthedocs.io) with a detailed description on installation
+Documentation can be found at [https://sciris.readthedocs.io](https://sciris.readthedocs.io) with a detailed description on installation
 instructions for both [Sciris](https://github.com/sciris/sciris) and
 [ScirisWeb](https://github.com/sciris/scirisweb); [how-to-contribute guidelines](https://sciris.readthedocs.io/en/latest/contributing.html); and [style guide](https://sciris.readthedocs.io/en/latest/style_guide.html).  
 
@@ -254,12 +259,14 @@ simplified interfaces to datetime arithmetic, and to limiting the execution
 of a program based on resource usage. \autoref{fig:block-diagram} shows the
 functional modules of Sciris. 
 
-![Block diagram of the main functional components in Sciris.\label{fig:block-diagram}](figures/sciris-block-diagram-00.png){ width=100% }
+<!-- NOTE: current size of width=75% gives the perfect layout to fit everything in 6 pages
+ -->
+ ![Block diagram of the main functional components in Sciris.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=75% }
 
 <!-- NOTE: present some key features (a subset of the docs)  
  -->
 
-#### Containers 
+### Containers 
 One of the key features in Sciris is `odict`, a flexible container of an associative array representing the best-of-all-worlds across lists, dictionaries, and numeric arrays. An ordered dictionary, similar to the OrderedDict class from `collections`, but supports list methods like integer indexing, key slicing, and item inserting. It can also replicate defaultdict behavior via the `defaultdict` argument.
 
 ```Python
@@ -272,7 +279,7 @@ for i, key, value in my_odict.enumitems():    # Additional methods for iteration
 
 The function `sc.mergedicts`, by default, skips things that are not dictionaries (e.g., `None`), and allows keys to be set multiple times. The first dictionary supplied will be used for the output type (e.g. if the first dictionary is an `sc.odict`, an `sc.odict` will be returned). This function is useful for cases such as function (keyword) arguments where the default is simply set as `None` but later on a dictionary will be needed.
 
-#### Dictionary functions
+### Container methods 
 ```Python
 sc.flattendict({'a':{'b':1,'c':{'d':2,'e':3}}})
 {('a', 'b'): 1, ('a', 'c', 'd'): 2, ('a', 'c', 'e'): 3}
@@ -289,21 +296,19 @@ can either be a single thing (e.g., a single dictionary key) or a list
 (e.g., a list of dict keys), this function can be used to do the conversion,
 so it is always safe to iterate over the output.
 
-
+### Prettify data/objects representations (or how to make stuff more human-readable)
 Pretty object
 
-The `die` keyword that provides different levels of safechecks/criticality of an error during execution for debugging.
 
-#### Plotting and visualization 
+### Plotting  
 vectocolor
-
 arraycolor
-
 orderlegend
 
 
 
-### Adaptive stochastic descent (ASD) optimization algorithm
+### Math and optimization functions
+Adaptive stochastic descent (ASD) optimization algorithm
 Sciris provides an optimization algorithm that has been designed to replicate
 the essential aspects of manual parameter fitting in an automated way.
 Specifically, ASD uses simple principles to form probabilistic assumptions
@@ -311,14 +316,11 @@ about (a) which parameters have the greatest effect on the objective
 function, and (b) optimal step sizes for each parameter
 [@kerr2018optimization].
 
+Date time arithmetic
 
+### Process and resource management
 
-#### 
-datetime arithmetic
-now
-day
-daydiff
-daterange
+mem, ram managments
 
 
 ### ScirisWeb
@@ -326,22 +328,9 @@ ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend
 that ScirisWeb, while functional, is still in beta development.
 
 
-<!-- Example: something as simple as providing an alias
-moving average, rolling mean, rolling average, convolution  -->
 
-<!-- # Concluding remarks
-The current stable version of Sciris includes implementations of heavily used
-code patterns and abstractions that facilitate the development and deployment
-of complex domain-specific scientific applications, regardless of their scope
-and scale, and further enables non-specialist audiences to interact with
-these complex applications. Sciris "stands on the shoulders of giants", and
-as such is not intended as a replacement of those, but rather as a strongly
-idiomatic scientific crucible that will result in a more effective and
-sustainable development process for solo-developers and teams alike, and
-hopefully it will help increasing the longevity [@perkel2020challenge] of new
-scientific libraries. Sciris is actively developed and maintained. 
 
-NOTE: Take on Cliff's Big Software paper in 2019
+<!-- NOTE: Take on Cliff's Big Software paper in 2019
   "Third, if a single modeling framework is adopted to the exclusion of other modeling approaches, it limits the potential for gaining insight by comparing across many different models and may result in a ‘herd’ effect (Eaton et al. 2014).""
 
 Though not sure these concluding remarks are really necessary
@@ -353,7 +342,7 @@ with Sciris, and while that may lead to the unavoidable question "aren't we
 reinventing the wheel?", we think that duplication is not always an
 undesirable process, as the community of scientific software developers still
 has a long way to go to identify clear and universal principles of scientific
-code design. -->
+code design. --> -->
 
 # Acknowledgements
 To be added
