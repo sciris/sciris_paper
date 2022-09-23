@@ -89,8 +89,7 @@ more done with less code, without the need to reinvent the wheel, and spend
 less time looking things up on StackOverflow (or the other 20+ tabs with the
 documentation of every single library your new application is built upon).
 Further, Sciris offers an extension to build webapps in Python: ScirisWeb. In
-contrast to [Plotly's Dash](https://github.com/plotly/dash) and [Streamlit]
-(https://streamlit.io/), which have limited options for customization,
+contrast to [Plotly's Dash](https://github.com/plotly/dash) and [Streamlit](https://streamlit.io/), which have limited options for customization,
 ScirisWeb is modular, so users can control which subset they use for a
 project. 
 <!-- NOTE: ^^^^ probably need to specify what sort of customisation is lacking in
@@ -112,9 +111,7 @@ software-related activities have also become increasingly complex, creating a
 steep learning curve and an increasing burden of code review
 [@burden-codereview]. 
 
-<!-- NOTE: find a paper of papers where they do a survey of the state of scientific code production, to justify the 
-  "large fraction"
- -->
+<!-- NOTE: need to find a recent paper where they show survey results of the state of scientific code production, to justify the "large fraction" phrase, I know i read one last year or the year before but i can't remember the authors. or journal. Maybe it was a blog post.  -->
 The current reality of scientific code production is that any workflow
 (e.g., either a full cycle in the development of a new software library, or
 in the execution of a one-off individual analysis) very often relies on
@@ -126,23 +123,49 @@ adopted collaborative, community-driven, open-source software approaches due
 to the significant savings in development costs and increases in code quality
 that they afford [@kerr2019epidemiology] (e.g., astropy
 [@robitaille2013astropy], nilearn [@nilearn] and fmriprep
-[@esteban2019fmriprep]). Despite this progress, a large fraction of
-scientific software efforts remain a solo adventure, leading to proliferation
-of tools that reinvent the wheel. 
+[@esteban2019fmriprep], [HoloViz's libraries](https://holoviz.org)). 
+Despite this progress, a large fraction of scientific software efforts remain a solo adventure, leading to proliferation of tools that reinvent the wheel. 
 
 <!-- NOTE: astropy and nilearn get a mention here because of their scale 
 and the size of the core dev team. There are other libraries such as seaborn and pingouin that are also open-source projects, but still are heavily developed and maintained by a single developer -->
+
+NOTE: also, reinventing the wheel sometimes leads to something better comining along too. Cliff discusses that in his 2019 paper 
 
 Scientific software differs from commercial production software in that it is
 a crucial component in the elaboration of scientific conclusions, and as such
 it should be: re-runnable, repeatable, reproducible, reusable, and
 replicable [@benureau2018re]. A key aspect to ensure these properties is
-readability of tutorials, documentation and especially of code itself. But it
-is essential to note that programming abstractions may not be a great way to
-express human-readable scientific ideas, which is what scientific code should
-convey (e.g., one would not include the user manual of a spectrophotometer
-as part of a report on protein analysis). 
-<!-- NOTE(SAK): not sure how the (eg. ...) is an example of the preceding sentence -->
+readability of tutorials, documentation and especially of code itself. **But
+it is essential to note that programming abstractions may not be a great way
+to express human-readable scientific ideas, which is what scientific code
+should convey**. As an example, PyTorch has become popular in academic and in
+research environments by making models easier to write compared to
+TensorFlow [@pytorch-research]. 
+
+For that reason Sciris provides tools that will result in (i) a more effective and
+sustainable scientific code production for solo-developers and teams alike, and
+(ii) increased longevity [@perkel2020challenge] of new scientific libraries. 
+
+
+Some of the key aspects that Sciris provides:
+
+*Scientific idiomaticity*. For that reason, Sciris promotes the use of human-readable named functions (i.e., `sc.smooth`, `sc.findnearest`, `sc.safedivide`) so that the resulting code is as scientifically and human-readable as possible. 
+
+*Handling behind-the-scenes semantics that obscure scientific code*
+
+*Wrapping commonly used functionality for plotting*
+
+
+*Ease of translation from and to other scientific programming languages* 
+
+*Providing highly Flexibility*
+
+*Brevity through simplifying interfaces*
+
+
+(e.g., one would
+not include the user manual of a spectrophotometer as part of a report on protein analysis).
+
 
 There are several notable libraries that follow this "simplifying interfaces"
 approach to letting researchers focus their time and efforts on solving problems,
@@ -151,12 +174,9 @@ communities. Some of these include PyTorch, seaborn
 [@waskom2021seaborn], DataLad [@halchenko2021datalad], pingouin
 [@vallat2018pingouin], hypothesis [@maciver2019hypothesis], Mayavi
 [@ramachandran2011mayavi] and PyVista[@sullivan2019pyvista], just to name a
-few though there are many more. As an example, PyTorch
-has become popular in academic and in research environments
-by making models easier to
-write compared to TensorFlow [@pytorch-research]. 
+few though there are many more. 
 
-Why do we need Sciris then? Sciris traces its origins to 2014, initially
+Sciris traces its origins to 2014, initially
 created to support development of the Optima suite of models
 [@kerr2015optima]. Among the existing libraries at the time we had not
 found one that simplified the complex semantics of powerful containers
@@ -214,19 +234,29 @@ simplified interfaces to datetime arithmetic, and to limiting the execution
 of a program based on resource usage. \autoref{fig:block-diagram} shows the
 functional modules of Sciris. 
 
+Like Matplolib and numpy, we note that some of Sciris function names are
+similar to Matlab's (i.e., `sc.tic` and `sc.toc`) because we aim to
+facilitate rapid migration and/or interoperability/mapping Matlab to
+Python. 
+
+
+
 ![Block diagram of the main functional components in Sciris.\label{fig:block-diagram}](figures/sciris-block-diagram-00.png){ width=100% }
 
 
 Documentation can be found at [https://sciris.readthedocs.io]
 (https://sciris.readthedocs.io) with a detailed description on installation
-and requirements for both [Sciris](https://github.com/sciris/sciris) and
-[ScirisWeb](https://github.com/sciris/scirisweb).
+instructions for both [Sciris](https://github.com/sciris/sciris) and
+[ScirisWeb](https://github.com/sciris/scirisweb); [how-to-contribute guidelines](https://sciris.readthedocs.io/en/latest/contributing.html); and [style guide](https://sciris.readthedocs.io/en/latest/style_guide.html).  
 
+Presentation/representation of messages, of types, of data, of objects, visualization 
 
 ## Key features
 <!-- NOTE: present some key features (a subset of the docs)  
  -->
-One of the key features in Sciris is `odict`, a flexible container representing the best-of-all-worlds across lists, dictionaries, and arrays. An ordered dictionary, similar to the OrderedDict class from `collections`, but supports list methods like integer indexing, key slicing, and item inserting. It can also replicate defaultdict behavior via the ``defaultdict`` argument.
+
+#### Containers 
+One of the key features in Sciris is `odict`, a flexible container of an associative array representing the best-of-all-worlds across lists, dictionaries, and numeric arrays. An ordered dictionary, similar to the OrderedDict class from `collections`, but supports list methods like integer indexing, key slicing, and item inserting. It can also replicate defaultdict behavior via the `defaultdict` argument.
 
 ```Python
 my_odict = sc.odict(foo=[1,2,3], bar=[4,5,6]) #
@@ -238,7 +268,7 @@ for i, key, value in my_odict.enumitems():    # Additional methods for iteration
 
 The function `sc.mergedicts`, by default, skips things that are not dictionaries (e.g., `None`), and allows keys to be set multiple times. The first dictionary supplied will be used for the output type (e.g. if the first dictionary is an `sc.odict`, an `sc.odict` will be returned). This function is useful for cases such as function (keyword) arguments where the default is simply set as `None` but later on a dictionary will be needed.
 
-Nested dictionary functions.
+#### Dictionary functions.
 
 ```Python
 sc.flattendict({'a':{'b':1,'c':{'d':2,'e':3}}})
@@ -261,7 +291,7 @@ Pretty object
 
 The `die` keyword that provides different levels of safechecks/criticality of an error during execution for debugging.
 
-## PLOTTING/VIZ
+#### Plotting and visualization 
 vectocolor
 arraycolor
 rgb2hex
@@ -273,16 +303,18 @@ savefig including metadata
 orderlegend
 
 
-Adaptive stochastic descent optimization algorithm, 
-sc.asd
+
+### Adaptive stochastic descent (ASD) optimization algorithm
+Sciris provides an optimization algorithm that has been designed to replicate
+the essential aspects of manual parameter fitting in an automated way.
+Specifically, ASD uses simple principles to form probabilistic assumptions
+about (a) which parameters have the greatest effect on the objective
+function, and (b) optimal step sizes for each parameter
+[@kerr2018optimization].
 
 
-Sciris often uses terminology similar to Matlab's (i.e., `sc.tic` and
-`sc.toc`) and plain-English-named functions (i.e., `sc.smooth`,
-`sc.sc.findnearest`, `sc.safedivide`) because it aims to capture some of the
-niceness of this type of IDEs that facilitate rapid prototyping. 
 
-
+#### 
 datetime arithmetic
 now
 day
@@ -290,13 +322,14 @@ daydiff
 daterange
 
 
-## ScirisWeb
+### ScirisWeb
 ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb  also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together.
 
 
 <!-- Example: something as simple as providing an alias
 moving average, rolling mean, rolling average, convolution  -->
 
+### Concluding remarks
 The current stable version of Sciris includes implementations of heavily used
 code patterns and abstractions that facilitate the development and deployment
 of complex domain-specific scientific applications, regardless of their scope
@@ -308,6 +341,20 @@ sustainable development process for solo-developers and teams alike, and
 hopefully it will help increasing the longevity [@perkel2020challenge] of new
 scientific libraries. Sciris is actively developed and maintained. We note
 that ScirisWeb, while functional, is still in beta development.
+
+
+<!-- NOTE: adapting from Cliff Big Software paper in 2019
+  Third, if a single modeling framework is adopted to the exclusion of other modeling approaches, it limits the potential for gaining insight by comparing across many different models and may result in a ‘herd’ effect (Eaton et al. 2014).
+ -->
+As we mentioned before, there are many terrific libraries whose aim is to
+provide simpler interfaces to different forms of scientific code across
+multiple levels of complexity. Some of these have functionality that overlap
+with Sciris, and while that may deserve the question of "aren't we
+reinventing the wheel?", we notice that duplication is not always undesirable
+process, as the community of scientific software developers still has a long
+way to go to identify clear and universal principles of scientific code
+design.
+
 
 # Acknowledgements
 To be added
