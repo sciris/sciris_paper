@@ -202,12 +202,7 @@ and scale, and further enables non-specialist audiences to interact with
 these complex applications. We note that Sciris "stands on the shoulders of giants", and as such is not intended as a replacement of those, but rather as an interface that facilitate a more effective and sustainable development process through:
 
 
-*Brevity through simplifying interfaces*.
-
-Sciris affords brevity to its users by encapsulating common regular patterns
-that span multiple lines of code into a function with a simple interface.
-With these functions one can succinctly express and execute (i) frequent
-plotting tasks (i.e., `sc.fig3d`, `sc.ax3d`, `sc.hex2rgb`); (ii) less
+*Brevity through simplifying interfaces*. Sciris affords brevity to its users by encapsulating common regular patterns that span multiple lines of code into a function with a simple interface. With these functions one can succinctly express and execute (i) frequent plotting tasks (i.e., `sc.fig3d`, `sc.ax3d`, `sc.hex2rgb`); (ii) less
 frequent tasks like pretty printing numeric arrays with up to 3 axes
 (e.g., `sc.printarr`) that can be useful for debugging; frequent but less
 simple tasks like merging containers (e.g., `sc.mergedicts`,
@@ -246,23 +241,19 @@ number of scientific applications
 and since 2022 has been designated as a critical project on the Python
 Package Index ([PyPI](https://pypi.org)).
 
-Documentation can be found at [https://sciris.readthedocs.io](https://sciris.readthedocs.io) with a detailed description on installation
-instructions for both [Sciris](https://github.com/sciris/sciris) and
+In \autoref{fig:block-diagram} we illustrate the functional modules of Sciris.
+
+
+![Block diagram of the Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly done in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=100% }
+
+## Highlights
+Sciris provides class- and function-based implementations of common operations
+ranging parallelization to improved object representation.
+Below, we provide a selection of examples of illustrating for instance common tasks
+ranging parallelization to improved object representation. It is by no means an exhaustive description of Sciris capabilities, but further information can be found at [https://sciris.readthedocs.io](https://sciris.readthedocs.io). Documentation includes installation instructions for both [Sciris](https://github.com/sciris/sciris) and
 [ScirisWeb](https://github.com/sciris/scirisweb); [how-to-contribute guidelines](https://sciris.readthedocs.io/en/latest/contributing.html); and [style guide](https://sciris.readthedocs.io/en/latest/style_guide.html).  
 
-
-## Key features
-Sciris provides class- and function based implementations
-of common operations ranging from merging ordered dictionaries, to providing
-simplified interfaces to datetime arithmetic, and to limiting the execution
-of a program based on resource usage. \autoref{fig:block-diagram} shows the
-functional modules of Sciris. 
-
-<!-- NOTE: current size of width=75% gives the perfect layout to fit everything in 6 pages
- -->
- ![Block diagram of the Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly done in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=72% }
-
-<!-- NOTE: present some key features (a subset of the docs)  
+<!-- NOTE: present some key features (only a subset of functions that i was immediately drawn too in Sciris)  
  -->
 
 ### Containers 
@@ -334,10 +325,10 @@ b: 6
 ————————————————————————————————————————————————————————————
 ```
 
-### Don't paint it black  
+<!-- ### Don't paint it black  
 `sc.vectocolor` converts a 1D array of N values into an Nx3 array
 of RGB values according to the current colormap. `sc.arraycolor` extends this functionality to multidimensional arrays. 
-
+ -->
 ### Parallelization
 We have found that one frequently hurdle scientists face is to parallelization. Sciris 
 provides `sc.parallelize`, which most simply, acts as an shortcut for using `multiprocess.Pool()`. However, importantly this function can also iterate over more complex arguments. It can either use a fixed number of CPUs or allocate dynamically based on load (`sc.loadbalancer`). Users can also specify a fixed number of CPUs to be used. The example below shows three different equivalent ways to iterate over multiple arguments:
@@ -347,7 +338,9 @@ provides `sc.parallelize`, which most simply, acts as an shortcut for using `mul
 
 > results1 = sc.parallelize(func=f, iterarg=[(1,2),(2,3),(3,4)])
 > results2 = sc.parallelize(func=f, iterkwargs={'x':[1,2,3], 'y':[2,3,4]})
-> results3 = sc.parallelize(func=f, iterkwargs=[{'x':1, 'y':2}, {'x':2, 'y':3}, {'x':3, 'y':4}])
+> results3 = sc.parallelize(func=f, iterkwargs=[{'x':1, 'y':2}, 
+                                                {'x':2, 'y':3}, 
+                                                {'x':3, 'y':4}])
 
 > assert results1 == results2 == results3
 ```
@@ -366,24 +359,9 @@ array([1,3])
 `sc.asd`: Sciris provides an implementation of the optimization algorithm Adaptive Stochastic dDscent (ASD) described in [@kerr2018optimization], and that has been designed to replicate the essential aspects of manual parameter fitting in an automated way. Specifically, ASD uses simple principles to form probabilistic assumptions about (a) which parameters have the greatest effect on the objective function, and(b) optimal
 step sizes for each parameter.
 
-### ScirisWeb
+# ScirisWeb
 ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb  also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together. We note
 that ScirisWeb, while functional, is still in beta development.
-
-
-<!-- NOTE: Take on Cliff's Big Software paper in 2019
-  "Third, if a single modeling framework is adopted to the exclusion of other modeling approaches, it limits the potential for gaining insight by comparing across many different models and may result in a ‘herd’ effect (Eaton et al. 2014).""
-
-Though not sure these concluding remarks are really necessary
-
-As we mentioned before, there are many terrific libraries whose aim is to
-provide simpler interfaces to different forms of scientific code across
-multiple levels of complexity. Some of these have functionality that overlap
-with Sciris, and while that may lead to the unavoidable question "aren't we
-reinventing the wheel?", we think that duplication is not always an
-undesirable process, as the community of scientific software developers still
-has a long way to go to identify clear and universal principles of scientific
-code design. --> -->
 
 # Acknowledgements
 To be added
