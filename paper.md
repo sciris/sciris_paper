@@ -1,27 +1,30 @@
 ---
-title: 'Sciris: A Python library to enable efficient and sustainable development of domain-driven research applications. '
+title: 'Sciris: Simplifying scientific software development in Python'
 tags:
   - python
   - scientific software development
   - computational science
+  - high-performance containers
+  - numerical utilities
+  - plotting
 authors:
   - name: Cliff C. Kerr
     orcid: 0000-0003-2517-2354
     corresponding: true
-    affiliation: 1 
+    affiliation: "1, 2" 
   - name: Paula Sanz-Leon
     orcid: 0000-0002-1545-6380
     affiliation: 1
   - name: Romesh G. Abeysuriya
     orcid: 0000-0002-9618-6457
-    affiliation: "1, 2"
+    affiliation: "2, 3"
   - name: George L. Chadderdon
     orcid: 0000-0002-3034-2330
     affiliation: 3
   - name: Vlad-Ştefan Harbuz
-    affiliation: 3
+    affiliation: 4
   - name: Parham Saidi
-    affiliation: 3  
+    affiliation: 4
   - name: James Jansson
     affiliation: 3
   - name: Maria del Mar Quiroga
@@ -30,27 +33,32 @@ authors:
   - name: Rowan Martin-Hughes
     orcid: 0000-0002-3724-2412
     affiliation: 3
-  - name: Sherrie Kelly
+  - name: Sherrie L. Kelly
     orcid: Sherrie Kelly
     affiliation: 3
   - name: Jamie A. Cohen
     orcid: 0000-0002-8479-1860
-    affiliation: 3
+    affiliation: 1
   - name: Robyn M. Stuart
     orcid: 0000-0001-6867-9265
-    affiliation: 3
+    affiliation: "1, 3"
   - name: Anna Nachesa
-    affiliation: 3
+    affiliation: 5
 
 affiliations:
  - name: Institute for Disease Modeling, Global Health Division, Bill \& Melinda Gates Foundation, Seattle, USA
    index: 1
- - name: Burnet Institute, Melbourne, Victoria, Australia 
+ - name: Complex Systems Group, School of Physics, University of Sydney, Sydney, Australia
    index: 2
- - name: Affiliation TBC by author
+ - name: Burnet Institute, Melbourne, Victoria, Australia 
    index: 3
-date: 21 September
+ - name: Saffron Software, Bucharest, Romania
+   index: 4
+ - name: Google Inc., Zürich, Switzerland
+   index: 5
+date: 2 December 2022
 bibliography: paper.bib
+
 
 # JOSS required sections
 # A list of the authors of the software and their affiliations, using the correct format 
