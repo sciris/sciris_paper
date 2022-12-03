@@ -199,7 +199,9 @@ samples; and finally, we want to plot the random points and surface together.
 Parallelizing the repeated draws and customizing the axes to render the 3D
 scatter plot plus mesh can be quite cumbersome. \autoref{fig:showcase-code} presents two functionally identical scripts and  highlights that the one written with Sciris is much more succinct and readable:
 
-![Comparison of functionally identical script without Sciris (left) and with Sciris (right). The resulting plot is shown below. \label{fig:showcase-code}](figures/sciris-showcase-code-and-output.png){ width=100% }
+![Comparison of a functionally identical script without Sciris (left) and with Sciris (right). The resulting plot is shown in \autoref{fig:showcase-output}. For the parts of the script that differ, Sciris reduces the number of lines required from 32 to 9, a 72% decrease. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
+
+![Output of the code shown in \autoref{fig:showcase-code}. \label{fig:showcase-output}](figures/sciris-showcase-output.png){ width=100% }
 
 
 # Overview
