@@ -60,7 +60,7 @@ affiliations:
    index: 5
  - name: Google Inc., Zürich, Switzerland
    index: 6
-   
+
 date: 2 December 2022
 bibliography: paper.bib
 
@@ -81,16 +81,12 @@ bibliography: paper.bib
 ---
 
 # Summary 
-[Sciris](https://github.com/sciris/sciris) is a cohesive collection of tools that enables simple interaction with foundational libraries from the scientific Python ecosystem(e.g., `numpy`, `scipy`, and `matplotlib`), as well as with libraries of broader scope, such as `multiprocessing` and `pickle`. The purpose of Sciris is to facilitate and accelerate the development and delivery of easy-to-use domain-specific scientific software. This is achieved by providing classes and methods that simplify the interface to frequently used functionality which, while essential for the development of robust software applications, diverts focus from the actual problem being solved. Some of Sciris' key features include: ensuring consistent dictionary, list, and array types (e.g., enabling users to provide inputs to a class or method as either lists or arrays); enabling ordered dictionary elements to be referenced by index; simplifying datetime arithmetic by allowing users to provide either a date string or a datetime object; simplifying the saving and loading of files and complex objects; and, simplifying the parallelisation of common operations. Sciris makes writing scientific code in Python faster, more pleasant and more readable for a diverse non-specialist audience. This means that with Sciris users can get more done with less code, without the need to reinvent the wheel, and spend less time looking things up on StackOverflow (or the other 20+ tabs with the documentation of every single library your new application is built upon). Further, Sciris offers an extension to build webapps in Python: ScirisWeb. In contrast to [Plotly's Dash](https://github.com/plotly/dash) and [Streamlit](https://streamlit.io/), which have limited options for customization, ScirisWeb is modular, so users can control which subset they use for a project. 
 
-<!-- NOTE: ^^^^ probably need to specify what sort of customisation is lacking in
-Streamlit and Dash  -->
+[Sciris](https://github.com/sciris/sciris) is a collection of tools that provides shortcuts to using foundational libraries from the scientific Python ecosystem (such as `numpy` and `matplotlib`), as well as with libraries of broader scope, such as `multiprocess` and `pickle`. The purpose of Sciris is to accelerate the development of easy-to-use scientific software. This is achieved by providing classes and functions that simplify access to frequently used functionality which, while essential for the development of robust software applications, diverts focus from the actual problem being solved. Some of Sciris' key features include: ensuring consistent dictionary, list, and array types (e.g., enabling users to provide inputs to a class or method as either lists or arrays); enabling ordered dictionary elements to be referenced by index; simplifying datetime arithmetic by allowing users to provide dates in any format, including strings; simplifying the saving and loading of files and complex objects; and simplifying the parallel execution of code. Sciris makes writing scientific code in Python faster, more pleasant, and more readable for a diverse non-specialist audience. With Sciris, users can: get the same functionality with fewer lines of code, avoid the need to reinvent the wheel, and spend less time looking up solutions on Stack Overflow. Sciris also forms the basis of ScirisWeb, an additional set of tools for building Flask-based Python webapps. In contrast to [Plotly Dash](https://github.com/plotly/dash) and [Streamlit](https://streamlit.io/), which have limited options for customization, ScirisWeb is completely modular, so users can choose which features they use for a project. In summary, Sciris (whose name comes from a combination of "scientific" and "iris", the Greek word for "rainbow") aims to streamline the wide spectrum of tasks commonly required in the  development of scientific computing applications.
 
-The name Sciris, a combination of Scientific + Iris (Greek word for "rainbow"), thus honors the wide spectrum of tasks commonly required in the  development of scientific computing applications.
 
 # Statement of need
-<!-- 
-Need to reduce this section-->
+
 With the increasing availability of large volumes of data and computing resources, scientists across multiple fields of research have been able to tackle increasingly complex problems. But to harness these resources, the need to develop and use domain-specific software has become a ubiquitous part of scientific projects. Commensurate with the complexity of problems, these software-related activities have also become increasingly complex, creating a steep learning curve and an increasing burden of code review [@burden-codereview].
 
 <!-- NOTE: need to find a recent paper where they show survey results of the state of scientific code production, to justify the "large fraction" phrase, I know i read one last year or the year before but i can't remember the authors. or journal. Maybe it was a blog post.  -->
@@ -238,13 +234,14 @@ We have found that one frequent hurdle scientists face is parallelization. Sciri
 array([1,3])
 ```
 
-`sc.asd`: Sciris provides an implementation of the optimization algorithm Adaptive Stochastic dDscent (ASD) described in [@kerr2018optimization], and that has been designed to replicate the essential aspects of manual parameter fitting in an automated way. Specifically, ASD uses simple principles to form probabilistic assumptions about (a) which parameters have the greatest effect on the objective function, and (b) optimal step sizes for each parameter.
+`sc.asd`: Sciris provides an implementation of the adaptive stochastic descent (ASD) optimization algorithm described in [@kerr2018optimization], and that has been designed to replicate the essential aspects of manual parameter fitting in an automated way. Specifically, ASD uses simple principles to form probabilistic assumptions about (a) which parameters have the greatest effect on the objective function, and (b) optimal step sizes for each parameter.
 
 # ScirisWeb
 ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb  also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together. We note that ScirisWeb, while functional, is still in beta development.
 
 # Acknowledgements
-To be added
+
+The authors wish to thank David P. Wilson, William B. Lytton, and Daniel J. Klein for their sponsorship of the Sciris project. David J. Kedziora, Dominic Delport, Kevin M. Jablonka, and Meikang Wu provided helpful feedback on and support for the Sciris library.
 
 
 # References
