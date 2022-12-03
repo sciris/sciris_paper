@@ -102,8 +102,9 @@ Sciris itself traces its origins to 2014, initially created to support developme
 
 For those reasons Sciris provides tools that will result in a more effective and sustainable scientific code production for solo-developers and teams alike, and increased longevity [@perkel2020challenge] of new scientific libraries. Some of the key functional aspects that Sciris provides are: (i) brevity through simplifying interfaces; (ii) scientific idiomaticity; (iii) locally scoped forgiving and strict exception handling; and, (iv) management of versioning information. We expand on each of these in Overview.
 
+
 # Example
-<!-- (perhaps mention a few of the libraries/dependencies) -->
+
 The Sciris library offers a coordinating interface to multiple well established and highly flexible Python libraries. Writing a script that directly uses multiple of these underlying libraries can obscure the key logic of the scientific problem. Whereas the Sciris interface keeps the focus on the science.
 
 For instance let us imagine that we want to randomly sample numbers from a user-defined smooth function. In addition, we want to repeatedly draw numbers for multiple levels of noise, and save these results in separate files. At a later stage, we would like to load the independent files, "glue" them together to reconstruct a surface embedded in 3D by interpolating the random samples; and finally, we want to plot the random points and surface together. Parallelizing the repeated draws and customizing the axes to render the 3D scatter plot plus mesh can be quite cumbersome. \autoref{fig:showcase-code} presents two functionally identical scripts and  highlights that the one written with Sciris is much more succinct and readable:
@@ -114,6 +115,7 @@ For instance let us imagine that we want to randomly sample numbers from a user-
 
 
 # Overview
+
 The current stable version of Sciris (2.0.0) includes implementations of heavily used code patterns and abstractions that facilitate the development and deployment of complex domain-specific scientific applications, regardless of their scope and scale, and further enables non-specialist audiences to interact with these complex applications. We note that Sciris "stands on the shoulders of giants", and as such is not intended as a replacement of those, but rather as an interface that facilitate a more effective and sustainable development process through:
 
 *Brevity through simplifying interfaces*. Sciris affords brevity to its users by encapsulating common regular patterns that span multiple lines of code into a function with a simple interface. With these functions one can succinctly express and execute (i) frequent plotting tasks (i.e., `sc.fig3d`, `sc.ax3d`, `sc.hex2rgb`); (ii) less frequent tasks like pretty printing numeric arrays with up to 3 axes (e.g., `sc.printarr`) that can be useful for debugging; frequent but less simple tasks like merging containers (e.g., `sc.mergedicts`, `sc.mergenested`, `sc.mergelists`), or line-by-line memory profiling (`sc.mprofile`).
@@ -236,12 +238,15 @@ array([1,3])
 
 `sc.asd`: Sciris provides an implementation of the adaptive stochastic descent (ASD) optimization algorithm described in [@kerr2018optimization], and that has been designed to replicate the essential aspects of manual parameter fitting in an automated way. Specifically, ASD uses simple principles to form probabilistic assumptions about (a) which parameters have the greatest effect on the objective function, and (b) optimal step sizes for each parameter.
 
+
 # ScirisWeb
+
 ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb  also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together. We note that ScirisWeb, while functional, is still in beta development.
+
 
 # Acknowledgements
 
-The authors wish to thank David P. Wilson, William B. Lytton, and Daniel J. Klein for their sponsorship of the Sciris project. David J. Kedziora, Dominic Delport, Kevin M. Jablonka, Meikang Wu, and Dina Mistry provided helpful feedback on and support for the Sciris library.
+The authors wish to thank David P. Wilson, William B. Lytton, and Daniel J. Klein for their sponsorship of the Sciris project. David J. Kedziora, Dominic Delport, Kevin M. Jablonka, Meikang Wu, and Dina Mistry provided helpful feedback on and support for the Sciris library. Sciris development was financially supported in part by the Australian Research Council (ARC) Discovery Early Career Research Award (DECRA) grant DE140101375, the Australian National Health and Medical Research Council (NHMRC) Project Grant APP1086540, the World Bank Assignment 1045478, and the United States Defense Advanced Research Projects Agency (DARPA) Contract N66001-10-C-2008.
 
 
 # References
