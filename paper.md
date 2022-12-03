@@ -241,7 +241,7 @@ ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend
 
 # Acknowledgements
 
-The authors wish to thank David P. Wilson, William B. Lytton, and Daniel J. Klein for their sponsorship of the Sciris project. David J. Kedziora, Dominic Delport, Kevin M. Jablonka, and Meikang Wu provided helpful feedback on and support for the Sciris library.
+The authors wish to thank David P. Wilson, William B. Lytton, and Daniel J. Klein for their sponsorship of the Sciris project. David J. Kedziora, Dominic Delport, Kevin M. Jablonka, Meikang Wu, and Dina Mistry provided helpful feedback on and support for the Sciris library.
 
 
 # References
