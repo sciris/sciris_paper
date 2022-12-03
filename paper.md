@@ -13,7 +13,7 @@ authors:
   - name: Cliff C. Kerr
     orcid: 0000-0003-2517-2354
     corresponding: true
-    affiliation: "1, 2, 3" 
+    affiliation: "1, 2" 
   - name: Paula Sanz-Leon
     orcid: 0000-0002-1545-6380
     affiliation: 1
@@ -66,7 +66,7 @@ bibliography: paper.bib
 
 
 # JOSS required sections
-# A list of the authors of the software and their affiliations, using the correct format 
+# A list of the authors of the software and their affiliations, using the correct format
 
 # A summary describing the high-level functionality and purpose of the software for a diverse, non-specialist audience.
 
@@ -103,7 +103,7 @@ Sciris itself traces its origins to 2014, initially created to support developme
 For those reasons Sciris provides tools that will result in a more effective and sustainable scientific code production for solo-developers and teams alike, and increased longevity [@perkel2020challenge] of new scientific libraries. Some of the key functional aspects that Sciris provides are: (i) brevity through simplifying interfaces; (ii) scientific idiomaticity; (iii) locally scoped forgiving and strict exception handling; and, (iv) management of versioning information. We expand on each of these in Overview.
 
 
-# Example
+# Illustrative example
 
 The Sciris library offers a coordinating interface to multiple well established and highly flexible Python libraries. Writing a script that directly uses multiple of these underlying libraries can obscure the key logic of the scientific problem. Whereas the Sciris interface keeps the focus on the science.
 
@@ -114,7 +114,7 @@ For instance let us imagine that we want to randomly sample numbers from a user-
 ![Output of the code shown in \autoref{fig:showcase-code}. \label{fig:showcase-output}](figures/sciris-showcase-output.png){ width=100% }
 
 
-# Overview
+# Design philosophy
 
 The current stable version of Sciris (2.0.0) includes implementations of heavily used code patterns and abstractions that facilitate the development and deployment of complex domain-specific scientific applications, regardless of their scope and scale, and further enables non-specialist audiences to interact with these complex applications. We note that Sciris "stands on the shoulders of giants", and as such is not intended as a replacement of those, but rather as an interface that facilitate a more effective and sustainable development process through:
 
@@ -138,12 +138,13 @@ In \autoref{fig:block-diagram} we illustrate the functional modules of Sciris.
 
 ![Block diagram of the Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly done in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=100% }
 
-## Highlights
+# Overview of key features
+
 Sciris provides class- and function-based implementations of common operations ranging from parallelization to improved object representation, below we provide a selection of examples. It is by no means an exhaustive description of Sciris' capabilities, but further information can be found at [https://sciris.readthedocs.io](https://sciris.readthedocs.io). Documentation includes installation instructions for both [Sciris](https://github.com/sciris/sciris) and [ScirisWeb](https://github.com/sciris/scirisweb); [how-to-contribute guidelines](https://sciris.readthedocs.io/en/latest/contributing.html); and [style guide](https://sciris.readthedocs.io/en/latest/style_guide.html).
 
 <!-- NOTE: present some key features (only a subset of functions that i was immediately drawn too in Sciris)   -->
 
-### Containers 
+## Containers 
 One of the key features in Sciris is `odict`, a flexible container representing an associative array with the best-of-all-worlds across lists, dictionaries, and numeric arrays. This is based on `OrderedDict` from [`collections`](https://docs.python.org/3/library/collections.html), but supports list methods like integer indexing, key slicing, and item inserting.
 
 ```Python
@@ -154,7 +155,7 @@ One of the key features in Sciris is `odict`, a flexible container representing 
      print(f'Item {i} is named {key} and has value {value}')
 ```
 
-### Container methods 
+## Container methods 
 
 `sc.promotetolist` developed so user-defined functions can handle inputs like ``'a'``  or ``['a', 'b']``. In other words, if an argument can either be a single thing (e.g., a single dictionary key) or a list (e.g., a list of dictionary keys), this function can be used to do the conversion, so it is always safe to iterate over the output.
 
@@ -171,7 +172,7 @@ One of the key features in Sciris is `odict`, a flexible container representing 
 {'a_b': 1, 'a_c_d': 2, 'a_c_e': 3}
 ```
 
-### Prettify object/data representations (or how to make stuff more human-readable)
+## Prettify object/data representations (or how to make stuff more human-readable)
 
 `sc.prettyobj` is a class that produces a pretty representation for objects, instead of just showing the type and memory pointer (Python's default for objects). 
 ```Python
@@ -214,7 +215,7 @@ b: 6
 `sc.vectocolor` converts a 1D array of N values into an Nx3 array
 of RGB values according to the current colormap. `sc.arraycolor` extends this functionality to multidimensional arrays. 
  -->
-### Parallelization
+## Parallelization
 We have found that one frequent hurdle scientists face is parallelization. Sciris provides `sc.parallelize`, which acts as a shortcut for using `multiprocess.Pool()`. Importantly, this function can also iterate over more complex arguments. It can either use a fixed number of CPUs or allocate dynamically based on load (`sc.loadbalancer`). Users can also specify a fixed number of CPUs to be used. The example below shows three different equivalent ways to iterate over multiple arguments:
 ```Python
 > def f(x,y):
@@ -229,7 +230,7 @@ We have found that one frequent hurdle scientists face is parallelization. Sciri
 > assert results1 == results2 == results3
 ```
 
-### Math functionality
+## Math functionality
 `sc.findinds` matches even if two things are not exactly equal due to differences in numeric type (e.g., floats vs. integers). If called with one argument, finds nonzero values. Called with two arguments, check for equality using `eps`. The code shown below produces the same result as calling `np.nonzero(np.isclose(arr, val))[0].`
 ```Python
 > sc.findinds([2,3,6,3], 3) 
@@ -241,12 +242,12 @@ array([1,3])
 
 # ScirisWeb
 
-ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb  also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together. We note that ScirisWeb, while functional, is still in beta development.
+ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together.
 
 
 # Acknowledgements
 
-The authors wish to thank David P. Wilson, William B. Lytton, and Daniel J. Klein for their sponsorship of the Sciris project. David J. Kedziora, Dominic Delport, Kevin M. Jablonka, Meikang Wu, and Dina Mistry provided helpful feedback on and support for the Sciris library. Sciris development was financially supported in part by the Australian Research Council (ARC) Discovery Early Career Research Award (DECRA) grant DE140101375, the Australian National Health and Medical Research Council (NHMRC) Project Grant APP1086540, the World Bank Assignment 1045478, and the United States Defense Advanced Research Projects Agency (DARPA) Contract N66001-10-C-2008.
+The authors wish to thank David P. Wilson, William B. Lytton, and Daniel J. Klein for their sponsorship of the Sciris project. David J. Kedziora, Dominic Delport, Kevin M. Jablonka, Meikang Wu, and Dina Mistry provided helpful feedback on and support for the Sciris library. Sciris development was made possible by financial support from the United States Defense Advanced Research Projects Agency (DARPA) Contract N66001-10-C-2008 (2010–2014), the World Bank Assignment 1045478 (2011–2015), the Australian National Health and Medical Research Council (NHMRC) Project Grant APP1086540 (2015–2017), the Australian Research Council (ARC) Discovery Early Career Research Award (DECRA) Fellowship Grant DE140101375 (2014–2019), Intellectual Ventures (2019–2020), and the Bill \& Melinda Gates Foundation (2020–present).
 
 
 # References
