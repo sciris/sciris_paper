@@ -161,7 +161,7 @@ of RGB values according to the current colormap. `sc.arraycolor` extends this fu
 ## Parallelization
 A frequent hurdle scientists face is parallelization. Sciris provides `sc.parallelize`, which acts as a shortcut for using `multiprocess.Pool()`. Importantly, this function can also iterate over more complex arguments. It can either use a fixed number of CPUs or allocate dynamically based on load (`sc.loadbalancer`). Users can also specify a fixed number of CPUs to be used. The example below shows three equivalent ways to iterate over multiple arguments:
 ```Python
-> def f(x,y):
+> def f(x, y):
 >     return x*y
 
 > out1 = sc.parallelize(func=f, iterarg=[(1,2),(2,3),(3,4)])
@@ -175,35 +175,31 @@ A frequent hurdle scientists face is parallelization. Sciris provides `sc.parall
 
 ## Plotting
 
-, with the results shown in \autoref{fig:plotting-example}:
+Numerous shortcuts for plotting customizations are available in Sciris; several commonly used features are illustrated below, with the results shown in \autoref{fig:plotting-example}:
 
 ```Python
-> sc.options(font='Garamond') # Custom font
+> sc.options(font='Garamond') # Set custom font
 > x = sc.daterange('2022-06-01', '2022-12-31', as_date=True) # Create dates
 > y = sc.smooth(np.random.randn(len(x))**2*1000) # Create smoothed random numbers
 > c = sc.vectocolor(y, cmap='turbo') # Set colors proportional to y values
 > plt.scatter(x, y, c=c) # Plot the data
-> sc.dateformatter() # Custom date axis formatter
-> sc.commaticks() # Add commas to y-axis ticks
+> sc.dateformatter() # Automatic x-axis date formatter
+> sc.commaticks() # Add commas to y-axis tick labels
 > sc.setylim() # Reset the y-axis limits
 > sc.boxoff() # Remove the top and right axis spines
 ```
 
-![Example of plot customizations via Sciris, including x- and y-axis ticks and the font.\label{fig:plotting-example}](figures/plotting-example.png){ width=70% }
-
-
+![Example of plot customizations via Sciris, including x- and y-axis tick labels and the font.\label{fig:plotting-example}](figures/plotting-example.png){ width=70% }
 
 
 # ScirisWeb
 
-
-
-ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together. In contrast to [Plotly Dash](https://github.com/plotly/dash) and [Streamlit](https://streamlit.io/), which have limited options for customization, ScirisWeb is completely modular, so users can choose which features they use for a project. 
+While a full description of [ScirisWeb](http://github.com/sciris/scirisweb) is beyond the scope of this paper, briefly, it builds on Sciris to enable the rapid development of Python-based webapps, including those powering [Optima Nutrition](https://nutrition.optimamodel.com) and [Covasim](https://app.covasim.org). By default, ScirisWeb uses [Vuejs](https://vuejs.org) for the frontend, [Flask](https://flask.palletsprojects.com) as the web framework, [Redis](https://redis.io) for the (optional) database, and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. However, ScirisWeb is completely modular, which means that it can also be used to link a [React](https://reactjs.org/) frontend to a [MySQL](https://www.mysql.com/) database with [Plotly](https://plotly.com/) figures. In contrast to [Plotly Dash](https://github.com/plotly/dash) and [Streamlit](https://streamlit.io/), which have limited options for customization or switching between technology stacks, ScirisWeb is completely modular, so users can freely choose which features they use for a given project.
 
 
 # Acknowledgements
 
-The authors wish to thank David P. Wilson, William B. Lytton, and Daniel J. Klein for their sponsorship of the Sciris project. David J. Kedziora, Dominic Delport, Kevin M. Jablonka, Meikang Wu, and Dina Mistry provided helpful feedback on and support for the Sciris library. Sciris development was made possible by financial support from the United States Defense Advanced Research Projects Agency (DARPA) Contract N66001-10-C-2008 (2010–2014), the World Bank Assignment 1045478 (2011–2015), the Australian National Health and Medical Research Council (NHMRC) Project Grant APP1086540 (2015–2017), the Australian Research Council (ARC) Discovery Early Career Research Award (DECRA) Fellowship Grant DE140101375 (2014–2019), Intellectual Ventures (2019–2020), and the Bill \& Melinda Gates Foundation (2020–present).
+The authors wish to thank David J. Kedziora, Dominic Delport, Kevin M. Jablonka, Meikang Wu, and Dina Mistry for providing helpful feedback on the Sciris library. David P. Wilson, William B. Lytton, and Daniel J. Klein provided in-kind support of Sciris development. Financial support has been provided by the United States Defense Advanced Research Projects Agency (DARPA) Contract N66001-10-C-2008 (2010–2014), World Bank Assignment 1045478 (2011–2015), the Australian National Health and Medical Research Council (NHMRC) Project Grant APP1086540 (2015–2017), the Australian Research Council (ARC) Discovery Early Career Research Award (DECRA) Fellowship Grant DE140101375 (2014–2019), Intellectual Ventures (2019–2020), and the Bill \& Melinda Gates Foundation (2020–present).
 
 
 # References
