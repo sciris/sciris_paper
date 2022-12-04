@@ -1,11 +1,7 @@
-# Set parameters and define random wave generator
+# Define random wave generator
 import numpy as np
-xmin = 0
-xmax = 10
-npts = 50
-noisevals = np.linspace(0, 1, 11)
 
-def randwave(std):
+def randwave(std, xmin=0, xmax=10, npts=50):
     np.random.seed() # Ensure differences between runs
     a = np.cos(np.linspace(xmin, xmax, npts))
     b = np.random.randn(npts)
@@ -30,8 +26,8 @@ multipool.join()
 
 # Save to files
 filenames = []
-for n,noiseval in enumerate(noisevals):
-    filename = f'noise{n}.obj'
+for noiseval in np.arange(11)):
+    filename = f'noise{noiseval}.obj'
     with gzip.GzipFile(filename, 'wb') as fileobj:
         fileobj.write(pickle.dumps(output[n]))
     filenames.append(filename)
