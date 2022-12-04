@@ -20,35 +20,35 @@ start = time.time()
 
 # Calculate output in parallel
 multipool = mp.Pool(processes=mp.cpu_count())
-output = multipool.map(randwave, np.arange(11))
+waves = multipool.map(randwave, np.arange(11))
 multipool.close()
 multipool.join()
 
 # Save to files
 filenames = []
-for n in range(len(output)):
-    filename = f'noise{n}.obj'
+for i in range(len(waves)):
+    filename = f'noise{i}.obj'
     with gzip.GzipFile(filename, 'wb') as fileobj:
-        fileobj.write(pickle.dumps(output[n]))
+        fileobj.write(pickle.dumps(waves[i]))
     filenames.append(filename)
 
 # Create dict from files
-data = {}
-for filename in filenames:
-    with gzip.GzipFile(filename) as fileobj:
+data_dict = {}
+for fname in filenames:
+    with gzip.GzipFile(fname) as fileobj:
         filestring = fileobj.read()
-        data[filename] = pickle.loads(filestring)
+        data_dict[fname] = pickle.loads(filestring)
 
 # Create 3D plot
-data_array = np.array([data[filename] for filename in filenames])
+data = np.array([data_dict[fname] for fname in filenames])
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.view_init(elev=45, azim=30)
-ny,nx = np.array(data_array).shape
+ny,nx = np.array(data).shape
 x = np.arange(nx)
 y = np.arange(ny)
 X, Y = np.meshgrid(x, y)
-surf = ax.plot_surface(X, Y, data_array, cmap='viridis')
+surf = ax.plot_surface(X, Y, data, cmap='viridis')
 fig.colorbar(surf)
 
 # Print elapsed time
