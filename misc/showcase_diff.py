@@ -2,7 +2,7 @@
 import numpy as np
 
 def randwave(std, xmin=0, xmax=10, npts=50):
-    np.random.seed() # Ensure differences between runs
+    np.random.seed(int(100*std)) # Ensure differences between runs
     a = np.cos(np.linspace(xmin, xmax, npts))
     b = np.random.randn(npts)
     return a + b*std
@@ -20,16 +20,16 @@ start = time.time()
 
 # Calculate output in parallel
 multipool = mp.Pool(processes=mp.cpu_count())
-waves = multipool.map(randwave, np.arange(11))
+waves = multipool.map(randwave, np.linspace(0, 1, 11))
 multipool.close()
 multipool.join()
 
 # Save to files
 filenames = []
-for i in range(len(waves)):
-    filename = f'noise{i}.obj'
+for i,wave in enumerate(waves):
+    filename = f'wave{i}.obj'
     with gzip.GzipFile(filename, 'wb') as fileobj:
-        fileobj.write(pickle.dumps(waves[i]))
+        fileobj.write(pickle.dumps(wave))
     filenames.append(filename)
 
 # Create dict from files
@@ -43,12 +43,11 @@ for fname in filenames:
 data = np.array([data_dict[fname] for fname in filenames])
 fig = plt.figure()
 ax = plt.axes(projection='3d')
-ax.view_init(elev=45, azim=30)
 ny,nx = np.array(data).shape
 x = np.arange(nx)
 y = np.arange(ny)
 X, Y = np.meshgrid(x, y)
-surf = ax.plot_surface(X, Y, data, cmap='viridis')
+surf = ax.plot_surface(X, Y, data, cmap='coolwarm')
 fig.colorbar(surf)
 
 # Print elapsed time
