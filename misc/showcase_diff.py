@@ -1,8 +1,6 @@
 # Define random wave generator
 import numpy as np
 
-noisevals = np.linspace(0, 10, 11)
-
 def randwave(std, xmin=0, xmax=10, npts=50):
     np.random.seed() # Ensure differences between runs
     a = np.cos(np.linspace(xmin, xmax, npts))
@@ -15,15 +13,11 @@ import sciris as sc
 # Start timing
 T = sc.timer()
 
-# Create object in parallel
-output = sc.parallelize(randwave, noisevals)
+# Calculate output in parallel
+output = sc.parallelize(randwave, np.arange(11))
 
 # Save to files
-filenames = sc.autolist()
-for n,noiseval in enumerate(noisevals):
-    filename = f'noise{noiseval}.obj'
-    sc.save(filename, output[n])
-    filenames += filename
+filenames = [sc.save(f'noise{i}.obj', output[i]) for i in range(len(output))]
 
 # Create dict from files
 data = sc.odict({filename:sc.load(filename) for filename in filenames})
