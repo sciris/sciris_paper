@@ -28,7 +28,7 @@ authors:
   - name: Parham Saidi
     affiliation: 4
   - name: James Jansson
-    affiliation: 5
+    affiliation: 3
   - name: Maria del Mar Quiroga
     orcid: 0000-0002-8943-2808
     affiliation: 3
@@ -45,7 +45,7 @@ authors:
     orcid: 0000-0001-6867-9265
     affiliation: "1, 3"
   - name: Anna Nachesa
-    affiliation: 6
+    affiliation: 5
 
 affiliations:
  - name: Institute for Disease Modeling, Global Health Division, Bill \& Melinda Gates Foundation, Seattle, USA
@@ -56,12 +56,10 @@ affiliations:
    index: 3
  - name: Saffron Software, Bucharest, Romania
    index: 4
- - name: Kirby Institute, University of New South Wales, Sydney, Australia
-   index: 5
  - name: Google Inc., Zürich, Switzerland
-   index: 6
+   index: 5
 
-date: 2 December 2022
+date: 4 December 2022
 bibliography: paper.bib
 
 
