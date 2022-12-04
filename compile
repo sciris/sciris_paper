@@ -4,7 +4,7 @@
 
 start=$SECONDS
 
-rm -i paper.jats paper.pdf
+rm -v paper.jats paper.pdf
 
 sudo docker run --rm \
     --volume $PWD:/data \
