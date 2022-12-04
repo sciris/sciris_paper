@@ -1,8 +1,6 @@
 # Define random wave generator
 import numpy as np
 
-noisevals = np.linspace(0, 10, 11)
-
 def randwave(std, xmin=0, xmax=10, npts=50):
     np.random.seed() # Ensure differences between runs
     a = np.cos(np.linspace(xmin, xmax, npts))
@@ -20,16 +18,16 @@ from mpl_toolkits.mplot3d import Axes3D # Unused but must be imported
 # Start timing
 start = time.time()
 
-# Create object in parallel
+# Calculate output in parallel
 multipool = mp.Pool(processes=mp.cpu_count())
-output = multipool.map(randwave, noisevals)
+output = multipool.map(randwave, np.arange(11))
 multipool.close()
 multipool.join()
 
 # Save to files
 filenames = []
-for n,noiseval in enumerate(noisevals):
-    filename = f'noise{noiseval}.obj'
+for n in range(len(output)):
+    filename = f'noise{n}.obj'
     with gzip.GzipFile(filename, 'wb') as fileobj:
         fileobj.write(pickle.dumps(output[n]))
     filenames.append(filename)
