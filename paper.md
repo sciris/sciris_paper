@@ -1,5 +1,5 @@
 ---
-title: 'Sciris: Simplifying scientific software development in Python'
+title: 'Sciris: Simplifying scientific software in Python'
 
 tags:
   - python
@@ -104,11 +104,11 @@ The Sciris library offers a straightforward interface to various well-establishe
 
 For example, imagine that we wish to sample random numbers from a user-defined function with varying noise levels, save the intermediate calculations, and plot the results. In vanilla Python, each of these operations is somewhat cumbersome. \autoref{fig:showcase-code} presents two functionally identical scripts and highlights that the one written with Sciris is much more succinct and readable:
 
-![Comparison of a functionally identical script without Sciris (left) and with Sciris (right). The resulting plot is shown in \autoref{fig:showcase-output}. For the parts of the script that differ, Sciris reduces the number of lines required from 32 to 9, a 72% decrease. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
+![Comparison of a functionally identical script without Sciris (left) and with Sciris (right), showing a nearly five-fold reduction in lines of code. The resulting plot is shown in \autoref{fig:showcase-output}. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
 
-![Output of the code shown in \autoref{fig:showcase-code}. \label{fig:showcase-output}](figures/sciris-showcase-output.png){ width=100% }
+![Output of the codes shown in \autoref{fig:showcase-code}, without Sciris (left) and with Sciris (right). The two are identical except for the new high-contrast colormap available in Sciris. \label{fig:showcase-output}](figures/sciris-showcase-output.png){ width=100% }
 
-This vignette illustrates many of Sciris' most-used features, including timing, parallelization, high-performance containers, file saving and loading, and plotting.
+This vignette illustrates many of Sciris' most-used features, including timing, parallelization, high-performance containers, file saving and loading, and plotting. For the parts of the script that differ, Sciris reduces the number of lines required from 33 to 7, a 79% decrease.
 
 
 # Design philosophy
