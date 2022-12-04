@@ -14,13 +14,13 @@ import sciris as sc
 T = sc.timer()
 
 # Calculate output in parallel
-output = sc.parallelize(randwave, np.arange(11))
+waves = sc.parallelize(randwave, np.arange(11))
 
 # Save to files
-filenames = [sc.save(f'noise{i}.obj', output[i]) for i in range(len(output))]
+filenames = [sc.save(f'noise{i}.obj', waves[i]) for i in range(len(waves))]
 
 # Create dict from files
-data = sc.odict({filename:sc.load(filename) for filename in filenames})
+data = sc.odict({fname:sc.load(fname) for fname in filenames})
 
 # Create 3D plot
 sc.surf3d(data[:])
