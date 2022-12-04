@@ -22,11 +22,11 @@ authors:
     affiliation: "1, 4"
   - name: George L. Chadderdon
     orcid: 0000-0002-3034-2330
-    affiliation: 4
+    affiliation: "4, 5"
   - name: Vlad-Ştefan Harbuz
-    affiliation: 5
+    affiliation: 6
   - name: Parham Saidi
-    affiliation: 5
+    affiliation: 6
   - name: James Jansson
     affiliation: 4
   - name: Maria del Mar Quiroga
@@ -43,9 +43,9 @@ authors:
     affiliation: 1
   - name: Robyn M. Stuart
     orcid: 0000-0001-6867-9265
-    affiliation: "1, 6"
+    affiliation: "1, 7"
   - name: Anna Nachesa
-    affiliation: 7
+    affiliation: 8
 
 affiliations:
  - name: Institute for Disease Modeling, Global Health Division, Bill \& Melinda Gates Foundation, Seattle, USA
@@ -56,12 +56,14 @@ affiliations:
    index: 3
  - name: Burnet Institute, Melbourne, Australia 
    index: 4
- - name: Saffron Software, Bucharest, Romania
+ - name: CAE USA, Tampa, USA
    index: 5
- - name: Department of Mathematical Sciences, University of Copenhagen, Copenhagen, Denmark
+ - name: Saffron Software, Bucharest, Romania
    index: 6
- - name: Google Inc., Zürich, Switzerland
+ - name: Department of Mathematical Sciences, University of Copenhagen, Copenhagen, Denmark
    index: 7
+ - name: Google, Zürich, Switzerland
+   index: 8
 
 date: 4 December 2022
 bibliography: paper.bib
