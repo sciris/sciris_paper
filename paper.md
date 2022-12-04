@@ -16,48 +16,52 @@ authors:
     affiliation: "1, 2" 
   - name: Paula Sanz-Leon
     orcid: 0000-0002-1545-6380
-    affiliation: 1
+    affiliation: "1, 3"
   - name: Romesh G. Abeysuriya
     orcid: 0000-0002-9618-6457
-    affiliation: "1, 3"
+    affiliation: "1, 4"
   - name: George L. Chadderdon
     orcid: 0000-0002-3034-2330
-    affiliation: 3
+    affiliation: 4
   - name: Vlad-Ştefan Harbuz
-    affiliation: 4
+    affiliation: 5
   - name: Parham Saidi
-    affiliation: 4
+    affiliation: 5
   - name: James Jansson
-    affiliation: 3
+    affiliation: 4
   - name: Maria del Mar Quiroga
     orcid: 0000-0002-8943-2808
-    affiliation: 3
+    affiliation: 4
   - name: Rowan Martin-Hughes
     orcid: 0000-0002-3724-2412
-    affiliation: 3
+    affiliation: 4
   - name: Sherrie L. Kelly
     orcid: Sherrie Kelly
-    affiliation: 3
+    affiliation: 4
   - name: Jamie A. Cohen
     orcid: 0000-0002-8479-1860
     affiliation: 1
   - name: Robyn M. Stuart
     orcid: 0000-0001-6867-9265
-    affiliation: "1, 3"
+    affiliation: "1, 6"
   - name: Anna Nachesa
-    affiliation: 5
+    affiliation: 7
 
 affiliations:
  - name: Institute for Disease Modeling, Global Health Division, Bill \& Melinda Gates Foundation, Seattle, USA
    index: 1
  - name: School of Physics, University of Sydney, Sydney, Australia
    index: 2
- - name: Burnet Institute, Melbourne, Victoria, Australia 
+ - name: QIMR Berghofer Medical Research Institute, Brisbane, Australia
    index: 3
- - name: Saffron Software, Bucharest, Romania
+ - name: Burnet Institute, Melbourne, Australia 
    index: 4
- - name: Google Inc., Zürich, Switzerland
+ - name: Saffron Software, Bucharest, Romania
    index: 5
+ - name: Department of Mathematical Sciences, University of Copenhagen, Copenhagen, Denmark
+   index: 6
+ - name: Google Inc., Zürich, Switzerland
+   index: 7
 
 date: 4 December 2022
 bibliography: paper.bib
@@ -100,13 +104,13 @@ Thus, we believe use of Sciris will result in more effective scientific code pro
 
 Compared to a domain-specific language like MATLAB, even relatively simple scientific codes in Python can require significant "boilerplate". This extra code can obscure the key logic of the scientific problem.
 
-For example, imagine that we wish to sample random numbers from a user-defined function with varying noise levels, save the intermediate calculations, and plot the results. In vanilla Python, each of these operations is somewhat cumbersome. \autoref{fig:showcase-code} presents two functionally identical scripts; the one written with Sciris is considerably more readable and succinct.
+For example, imagine that we wish to sample random numbers from a user-defined function with varying noise levels, save the intermediate calculations, and plot the results. In vanilla Python, each of these operations is somewhat cumbersome. \autoref{fig:showcase-code} presents two functionally identical scripts; the one written with Sciris is considerably more readable and succinct. 
+
+This vignette illustrates many of Sciris' most-used features, including timing, parallelization, high-performance containers, file saving and loading, and plotting. For the lines of the script that differ, Sciris reduces the number of lines of code required from 33 to 7, a 79% decrease.
 
 ![Comparison of a functionally identical script without Sciris (left) and with Sciris (right), showing a nearly five-fold reduction in lines of code. The resulting plot is shown in \autoref{fig:showcase-output}. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
 
 ![Output of the codes shown in \autoref{fig:showcase-code}, without Sciris (left) and with Sciris (right). The two are identical except for the new high-contrast colormap available in Sciris. \label{fig:showcase-output}](figures/sciris-showcase-output.png){ width=100% }
-
-This vignette illustrates many of Sciris' most-used features, including timing, parallelization, high-performance containers, file saving and loading, and plotting. For the lines of the script that differ, Sciris reduces the number of lines of code required from 33 to 7, a 79% decrease.
 
 
 # Design philosophy
@@ -169,7 +173,6 @@ A frequent hurdle scientists face is parallelization. Sciris provides `sc.parall
 ```
 
 ## Plotting
-
 Numerous shortcuts for customizing and prettifying plots are available in Sciris; several commonly used features are illustrated below, with the results shown in \autoref{fig:plotting-example}:
 
 ```Python
