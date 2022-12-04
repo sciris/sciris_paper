@@ -123,21 +123,21 @@ The aim of Sciris is to make common tasks simple. The current stable version of 
 
 *Management of versioning information*. Keeping track of dates, authors, code version, plus additional notes or comments is an essential part of scientific projects. Sciris provides methods to easily save and load metadata to/from figure files, including Git information (`sc.savefig`, `sc.gitinfo`, `sc.loadmetadata`), as well as shortcuts for comparing module versions (`sc.compareversions`) or enforcing them (`sc.require`).
 
-Our investments in Sciris paid off when in early 2020 its combination of brevity and simplicity proved crucial in enabling the rapid development of the Covasim model of COVID-19 transmission [@kerr2021covasim; @kerr2022python]. Covasim's relative simplicity and readability, based in large part on its heavy use of Sciris, enabled it to become one of the most widely adopted models of COVID-19, used by students, researchers and policymakers in over 30 countries. In addition to Covasim, Sciris is currently used in a number of scientific applications [@kedziora2019cascade; @atomica; @fraser2021using; @hiptool; @synthpops; @parestlib].
+Our investments in Sciris paid off when in early 2020 its combination of brevity and simplicity proved crucial in enabling the rapid development of the Covasim model of COVID-19 transmission [@kerr2021covasim; @kerr2022python]. Covasim's relative simplicity and readability, based in large part on its heavy use of Sciris, enabled it to become one of the most widely adopted models of COVID-19, used by students, researchers and policymakers in over 30 countries. 
 
-In \autoref{fig:block-diagram} we illustrate the functional modules of Sciris.
-
-![Block diagram of the Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly performed in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=100% }
+In addition to Covasim, Sciris is currently used by a number of other scientific software tools, such as [Optima HIV](https://github.com/optimamodel/optima) [@kerr2015optima], [Optima Nutrition](https://github.com/optimamodel/nutrition) [@pearson2018optima], the [Cascade Analysis Tool](https://cascade.tools) [@kedziora2019cascade], [Atomica](https://atomica.tools) [@atomica], Optima TB [@gosce2021optima], the [Health Interventions Prioritization Tool](http://hiptool.org) [@fraser2021using], [SynthPops](https://synthpops.org) [@synthpops], and [FPsim](https://fpsim.org) [@o2022fpsim].
 
 
 # Overview of key features
 
-Sciris provides class- and function-based implementations of common operations ranging from parallelization to improved object representation, below we provide a selection of examples. It is by no means an exhaustive description of Sciris' capabilities, but further information can be found at [https://sciris.readthedocs.io](https://sciris.readthedocs.io). Documentation includes installation instructions for both [Sciris](https://github.com/sciris/sciris) and [ScirisWeb](https://github.com/sciris/scirisweb); [how-to-contribute guidelines](https://sciris.readthedocs.io/en/latest/contributing.html); and [style guide](https://sciris.readthedocs.io/en/latest/style_guide.html).
+Sciris provides class- and function-based implementations of common operations ranging from parallelization to improved object representation; here we illustrate a smattering of key features in greater detail. Further information can be found at [https://docs.sciris.org](https://docs.sciris.org). Documentation includes installation instructions (`pip install sciris`), for both [Sciris](https://github.com/sciris/sciris) and [ScirisWeb](https://github.com/sciris/scirisweb), usage instructions, and [style guidelines](https://sciris.readthedocs.io/en/latest/style_guide.html).
 
-<!-- NOTE: present some key features (only a subset of functions that i was immediately drawn too in Sciris)   -->
+\autoref{fig:block-diagram} illustrates the functional modules of Sciris.
 
-## Containers 
-One of the key features in Sciris is `odict`, a flexible container representing an associative array with the best-of-all-worlds across lists, dictionaries, and numeric arrays. This is based on `OrderedDict` from [`collections`](https://docs.python.org/3/library/collections.html), but supports list methods like integer indexing, key slicing, and item inserting.
+![Block diagram of the Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly performed in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=100% }
+
+## High-performance containers
+One of the key features in Sciris is `sc.odict`, a flexible container representing an associative array with the best-of-all-worlds across lists, dictionaries, and numeric arrays. This is based on `OrderedDict` from [`collections`](https://docs.python.org/3/library/collections.html), but supports list methods like integer indexing, key slicing, and item inserting:
 
 ```Python
 > my_odict = sc.odict(foo=[1,2,3], bar=[4,5,6]) 
@@ -147,60 +147,11 @@ One of the key features in Sciris is `odict`, a flexible container representing 
      print(f'Item {i} is named {key} and has value {value}')
 ```
 
-## Container methods 
-
-`sc.promotetolist` developed so user-defined functions can handle inputs like ``'a'``  or ``['a', 'b']``. In other words, if an argument can either be a single thing (e.g., a single dictionary key) or a list (e.g., a list of dictionary keys), this function can be used to do the conversion, so it is always safe to iterate over the output.
-
-`sc.mergedicts`, by default, skips things that are not dictionaries (e.g., `None`), and allows keys to be set multiple times. The first dictionary supplied will be used for the output type (e.g., if the first dictionary is an `sc.odict`, an `sc.odict` will be returned). This function is useful for cases such as function (keyword) arguments where the default is simply set as `None` but later on a dictionary will be needed.
-
-`sc.flattendict`, flattens a nested dictionary 
-
+## Numerical utilities
+`sc.findinds` matches even if two things are not exactly equal due to differences in numeric type (e.g., floats vs. integers). The code shown below produces the same result as calling `np.nonzero(np.isclose(arr, val))[0].`
 ```Python
-> sc.flattendict({'a':{'b':1,'c':{'d':2,'e':3}}})
-{('a', 'b'): 1, ('a', 'c', 'd'): 2, ('a', 'c', 'e'): 3}
-
-
-> sc.flattendict({'a':{'b':1,'c':{'d':2,'e':3}}}, sep='_')
-{'a_b': 1, 'a_c_d': 2, 'a_c_e': 3}
-```
-
-## Prettify object/data representations (or how to make stuff more human-readable)
-
-`sc.prettyobj` is a class that produces a pretty representation for objects, instead of just showing the type and memory pointer (Python's default for objects). 
-```Python
-> myobj = sc.prettyobj()
-> myobj.a = 3
-> myobj.b = {'a':6}
-> print(myobj)
-<sciris.sc_utils.prettyobj at 0x7ffa1e243910>
-————————————————————————————————————————————————————————————
-a: 3
-b: {'a': 6}
-————————————————————————————————————————————————————————————
-```
-This class can also be used as the base class for custom
-classes.
-
-```Python
-> class MyObj(sc.prettyobj):
->
->     def __init__(self, a, b):
->         self.a = a
->         self.b = b
->
->     def mult(self):
->         return self.a * self.b
-
-> myobj = MyObj(a=4, b=6)
-> print(myobj)
-<__main__.MyObj at 0x7fd9acd96c10>
-————————————————————————————————————————————————————————————
-Methods:
-  mult()
-————————————————————————————————————————————————————————————
-a: 4
-b: 6
-————————————————————————————————————————————————————————————
+> sc.findinds([2,3,6,3], 3) 
+array([1,3])
 ```
 
 <!-- ### Don't paint it black  
@@ -208,31 +159,44 @@ b: 6
 of RGB values according to the current colormap. `sc.arraycolor` extends this functionality to multidimensional arrays. 
  -->
 ## Parallelization
-We have found that one frequent hurdle scientists face is parallelization. Sciris provides `sc.parallelize`, which acts as a shortcut for using `multiprocess.Pool()`. Importantly, this function can also iterate over more complex arguments. It can either use a fixed number of CPUs or allocate dynamically based on load (`sc.loadbalancer`). Users can also specify a fixed number of CPUs to be used. The example below shows three different equivalent ways to iterate over multiple arguments:
+A frequent hurdle scientists face is parallelization. Sciris provides `sc.parallelize`, which acts as a shortcut for using `multiprocess.Pool()`. Importantly, this function can also iterate over more complex arguments. It can either use a fixed number of CPUs or allocate dynamically based on load (`sc.loadbalancer`). Users can also specify a fixed number of CPUs to be used. The example below shows three equivalent ways to iterate over multiple arguments:
 ```Python
 > def f(x,y):
 >     return x*y
 
-> results1 = sc.parallelize(func=f, iterarg=[(1,2),(2,3),(3,4)])
-> results2 = sc.parallelize(func=f, iterkwargs={'x':[1,2,3], 'y':[2,3,4]})
-> results3 = sc.parallelize(func=f, iterkwargs=[{'x':1, 'y':2}, 
-                                                {'x':2, 'y':3}, 
-                                                {'x':3, 'y':4}])
+> out1 = sc.parallelize(func=f, iterarg=[(1,2),(2,3),(3,4)])
+> out2 = sc.parallelize(func=f, iterkwargs={'x':[1,2,3], 'y':[2,3,4]})
+> out3 = sc.parallelize(func=f, iterkwargs=[{'x':1, 'y':2}, 
+                                            {'x':2, 'y':3}, 
+                                            {'x':3, 'y':4}])
 
-> assert results1 == results2 == results3
+> assert out1 == out2 == out3
 ```
 
-## Math functionality
-`sc.findinds` matches even if two things are not exactly equal due to differences in numeric type (e.g., floats vs. integers). If called with one argument, finds nonzero values. Called with two arguments, check for equality using `eps`. The code shown below produces the same result as calling `np.nonzero(np.isclose(arr, val))[0].`
+## Plotting
+
+, with the results shown in \autoref{fig:plotting-example}:
+
 ```Python
-> sc.findinds([2,3,6,3], 3) 
-array([1,3])
+> sc.options(font='Garamond') # Custom font
+> x = sc.daterange('2022-06-01', '2022-12-31', as_date=True) # Create dates
+> y = sc.smooth(np.random.randn(len(x))**2*1000) # Create smoothed random numbers
+> c = sc.vectocolor(y, cmap='turbo') # Set colors proportional to y values
+> plt.scatter(x, y, c=c) # Plot the data
+> sc.dateformatter() # Custom date axis formatter
+> sc.commaticks() # Add commas to y-axis ticks
+> sc.setylim() # Reset the y-axis limits
+> sc.boxoff() # Remove the top and right axis spines
 ```
 
-`sc.asd`: Sciris provides an implementation of the adaptive stochastic descent (ASD) optimization algorithm described in [@kerr2018optimization], and that has been designed to replicate the essential aspects of manual parameter fitting in an automated way. Specifically, ASD uses simple principles to form probabilistic assumptions about (a) which parameters have the greatest effect on the objective function, and (b) optimal step sizes for each parameter.
+![Example of plot customizations via Sciris, including x- and y-axis ticks and the font.\label{fig:plotting-example}](figures/plotting-example.png){ width=70% }
+
+
 
 
 # ScirisWeb
+
+
 
 ScirisWeb provides a solution using [Vuejs](https://vuejs.org/) for the frontend, [Flask](https://flask.palletsprojects.com/en/2.2.x/) as the web framework, [Redis](https://redis.io/) for the (optional) database and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. ScirisWeb also enables users to use a React frontend linked to an SQL database with Plotly figures, ScirisWeb can serve as the glue holding all of that together. In contrast to [Plotly Dash](https://github.com/plotly/dash) and [Streamlit](https://streamlit.io/), which have limited options for customization, ScirisWeb is completely modular, so users can choose which features they use for a project. 
 
