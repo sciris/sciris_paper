@@ -66,20 +66,6 @@ affiliations:
 date: 5 December 2022
 bibliography: paper.bib
 
-
-# JOSS required sections
-# A list of the authors of the software and their affiliations, using the correct format
-
-# A summary describing the high-level functionality and purpose of the software for a diverse, non-specialist audience.
-
-# A Statement of need section that clearly illustrates the research purpose of the software and places it in the context of related work.
-
-# A list of key references, including to other software addressing related needs. Note that the references should include full names of venues, e.g., journals and conferences, not abbreviations only understood in the context of a specific discipline.
-
-# Mention (if applicable) a representative set of past or ongoing research projects using the software and recent scholarly publications enabled by it.
-
-# Acknowledgement of any financial support.
-
 ---
 
 # Summary 
@@ -89,28 +75,34 @@ bibliography: paper.bib
 
 # Statement of need
 
+## The landscape of scientific software
 With the increasing availability of large volumes of data and computing resources, scientists across multiple fields of research have been able to tackle increasingly complex problems. But to harness these resources, the need for domain-specific software has become much greater. As the complexity of the questions being tackled has increased, so too has the software used to answer them, creating a steep learning curve and an increasing burden of code review [@burden-codereview].
 
-Scientific code workflows (e.g., either a full cycle in the development of a new software library, or in the execution of a one-off analysis) typically rely on multiple codebases, including but not limited to: low-level libraries, domain-specific open-source software, and self-developed and/or inherited Swiss-army-knife toolboxes (whose original developer may or may not be around to pass on undocumented wisdom). Several scientific communities have adopted collaborative, community-driven, open-source software approaches due to the significant savings in development costs and increases in code quality that they afford [@kerr2019epidemiology], such as [`astropy`](https://www.astropy.org/) [@robitaille2013astropy], [`fmriprep`](https://fmriprep.org) [@esteban2019fmriprep], and [`nextstrain`](https://nextstrain.org) [@hadfield2018nextstrain]. Despite this progress, a large fraction of scientific software efforts remain a solo adventure. This leads to proliferation of tools where resources are largely spent reinventing wheels of variable quality, which jeopardizes the code's minimum requirements of being "re-runnable, repeatable, reproducible, reusable, and replicable" [@benureau2018re].
+Scientific code workflows (e.g., either a full cycle in the development of a new software library, or in the execution of a one-off analysis) typically rely on multiple codebases, including but not limited to: low-level libraries, domain-specific open-source software, and self-developed and/or inherited Swiss-Army-knife toolboxes (whose original developer may or may not be around to pass on undocumented wisdom). Several scientific communities have adopted collaborative, community-driven, open-source software approaches due to the significant savings in development costs and increases in code quality that they afford, such as [`astropy`](https://www.astropy.org/) [@robitaille2013astropy], [`fmriprep`](https://fmriprep.org) [@esteban2019fmriprep], and [`nextstrain`](https://nextstrain.org) [@hadfield2018nextstrain]. Despite this progress, a large fraction of scientific software development efforts remain a solo adventure [@kerr2019epidemiology]. This leads to proliferation of tools where resources are largely spent reinventing wheels of variable quality, which jeopardizes the code's minimum requirements of being "re-runnable, repeatable, reproducible, reusable, and replicable" [@benureau2018re].
 
 Beyond these requirements, low-level programming abstractions may get in the way of clarifying the science. For instance, one of the reasons PyTorch has become popular in academic and research environments is its success in making models easier to write compared to TensorFlow [@pytorch-research]. The need for libraries that provide "simplifying interfaces" for research applications is reflected in the development of multiple libraries in scientific Python ecosystems that have enabled researchers to focus their time and efforts on solving problems, prototyping solutions, deploying applications, and educating their communities. In addition to PyTorch (simplifying/extending Tensorflow), other examples include seaborn (simplifying/extending Matplotlib) [@waskom2021seaborn], pingouin (simplifying/extending pandas), and PyVista (simplifying/extending VTK) [@sullivan2019pyvista], among many others.
 
-[Sciris](https://github.com/sciris/sciris) (whose name comes from a combination of "scientific" and "iris", the Greek word for "rainbow") began in 2014, to support development of the Optima suite of models [@kerr2015optima]. We repeatedly encountered the same inconveniences while building scientific webapps, and so began collecting the tools we used to overcome them into a shared library. While Python is considered an easy-to-use language for beginners, the motivation that shaped Sciris' evolution was to further lower the barriers to access the numerous supporting libraries we were using.
+## Sciris in practice
+The name [Sciris](https://github.com/sciris/sciris) is a portmanteau of "scientific" and "iris" (a reference to seeing clearly, as well as the Greek word for "rainbow"). We began work on it in 2014, initially to support development of the Optima suite of models [@kerr2015optima, @kerr2020optima]. We repeatedly encountered the same inconveniences while building scientific webapps, and so we began collecting the tools we used to overcome them into a shared library. While Python is considered an easy-to-use language for beginners, the motivation that shaped Sciris' evolution was to further lower the barriers to accessing the numerous supporting libraries we were using.
 
-Thus, we believe use of Sciris will result in more effective scientific code production for solo developers and teams alike, including increased longevity [@perkel2020challenge] of new scientific libraries. Some of the key functional aspects that Sciris provides are: (i) brevity through simple interfaces; (ii) "dejargonification"; (iii) fine-grained exception handling; and (iv) version management. We expand on each of these below, but first provide a vignette that illustrates many of Sciris' features.
+Our investments in Sciris paid off when in early 2020 its combination of brevity and simplicity proved crucial in enabling the rapid development of the Covasim model of COVID-19 transmission [@kerr2021covasim]. Covasim's relative simplicity and readability, based in large part on its heavy use of Sciris, enabled it to become one of the most widely adopted models of COVID-19, used by students, researchers, and policymakers in over 30 countries [@kerr2022python].
+
+In addition to Covasim, Sciris is currently used by a number of other scientific software tools, such as [Optima HIV](https://github.com/optimamodel/optima) [@kerr2015optima], [Optima Nutrition](https://github.com/optimamodel/nutrition) [@pearson2018optima], the [Cascade Analysis Tool](https://cascade.tools) [@kedziora2019cascade], [Atomica](https://atomica.tools) [@atomica], Optima TB [@gosce2021optima], the [Health Interventions Prioritization Tool](http://hiptool.org) [@fraser2021using], [SynthPops](https://synthpops.org) [@synthpops], and [FPsim](https://fpsim.org) [@o2022fpsim].
+
+Thus, we believe use of Sciris will result in more efficient scientific code production for solo developers and teams alike, including increased longevity of new scientific libraries [@perkel2020challenge]. Some of the key functional aspects that Sciris provides are: (i) brevity through simple interfaces; (ii) "dejargonification"; (iii) fine-grained exception handling; and (iv) version management. We expand on each of these below, but first provide a vignette that illustrates many of Sciris' features.
 
 
 # Vignette
 
-Compared to a domain-specific language like MATLAB, even relatively simple scientific code in Python can require significant "boilerplate". This extra code can obscure the key logic of the scientific problem.
+Compared with a domain-specific language like MATLAB, even relatively simple scientific code in Python can require significant "boilerplate". This extra code can obscure the key logic of the scientific question being addressed.
 
 For example, imagine that we wish to sample random numbers from a user-defined function with varying noise levels, save the intermediate calculations, and plot the results. In vanilla Python, each of these operations is somewhat cumbersome. \autoref{fig:showcase-code} presents two functionally identical scripts; the one written with Sciris is considerably more readable and succinct. 
 
 This vignette illustrates many of Sciris' most-used features, including timing, parallelization, high-performance containers, file saving and loading, and plotting. For the lines of the script that differ, Sciris reduces the number of lines of code required from 33 to 7, a 79% decrease.
 
-![Comparison of a functionally identical script without Sciris (left) and with Sciris (right), showing a nearly five-fold reduction in lines of code. The resulting plot is shown in \autoref{fig:showcase-output}. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
+![Comparison of functionally identical scripts without Sciris (left) and with Sciris (right), showing a nearly five-fold reduction in lines of code. The resulting plots are shown in \autoref{fig:showcase-output}. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
 
-![Output of the code shown in \autoref{fig:showcase-code}, without Sciris (left) and with Sciris (right). The two are identical except for the new high-contrast colormap available in Sciris. \label{fig:showcase-output}](figures/sciris-showcase-output.png){ width=100% }
+![Output of the scripts shown in \autoref{fig:showcase-code}, without Sciris (left) and with Sciris (right). The two plots are identical except for the new high-contrast colormap available in Sciris. \label{fig:showcase-output}](figures/sciris-showcase-output.png){ width=100% }
 
 
 # Design philosophy
@@ -119,23 +111,16 @@ The aim of Sciris is to make common tasks simpler. Sciris includes implementatio
 
 *Brevity through simple interfaces*. Sciris packages common patterns requiring multiple lines of code into single, simple functions. With these functions one can succinctly express and execute frequent plotting tasks (e.g., `sc.commaticks`, `sc.dateformatter`, `sc.plot3d`); ensure consistent types, including containers (e.g., `sc.toarray`, `sc.mergedicts`, `sc.mergelists`), or even perform line-by-line performance profiling (`sc.profile`). Brevity is also achieved by extending functionality of well established objects (e.g., `OrderedDict` via `sc.odict`) or methods (e.g., `isinstance` via `sc.checktype` that enables the comparison of objects against higher-level types like `arraylike`).
 
-*Dejargonification*. Sciris aims to use plain function names (e.g., `sc.smooth`, `sc.findnearest`, `sc.safedivide`) so that the resulting code is as scientifically clear and human-readable as possible. Sciris also provides some [MATLAB](https://www.mathworks.com/products/matlab.html)-like functionality, and uses the same names (e.g., `sc.tic` and `sc.toc`; `sc.boxoff`) to minimize the learning curve for scientists with this background.
+*Dejargonification*. Sciris aims to use plain function names (e.g., `sc.smooth`, `sc.findnearest`, `sc.safedivide`) so that the resulting code is as scientifically clear and human-readable as possible. Sciris also provides some [MATLAB](https://www.mathworks.com/products/matlab.html)-like functionality, and uses the same names (e.g., `sc.tic` and `sc.toc`; `sc.boxoff`) to minimize the learning curve for scientists who have MATLAB experience.
 
 *Fine-grained exception handling*. Across many classes and functions, Sciris uses the keyword `die`, enabling users to set a locally scoped level of strictness in the handling of exceptions. If `die=False`, Sciris is more forgiving and softly handles exceptions by using its default (opinionated) behavior, such as printing a warning and returning `None` so users can decide how to proceed. If `die=True`, it directly raises the corresponding exception and message. This flexibility reduces the need for try-catch blocks, which can distract from the code's scientific logic.
 
 *Version management*. Keeping track of dates, authors, and code versions, plus additional notes or comments, is an essential part of scientific projects. Sciris provides methods to easily save and load metadata to/from figure files, including Git information (`sc.savefig`, `sc.gitinfo`, `sc.loadmetadata`), as well as shortcuts for comparing module versions (`sc.compareversions`) or requiring them (`sc.require`).
 
 
-# Sciris in practice
-
-Our investments in Sciris paid off when in early 2020 its combination of brevity and simplicity proved crucial in enabling the rapid development of the Covasim model of COVID-19 transmission [@kerr2021covasim]. Covasim's relative simplicity and readability, based in large part on its heavy use of Sciris, enabled it to become one of the most widely adopted models of COVID-19, used by students, researchers, and policymakers in over 30 countries [@kerr2022python].
-
-In addition to Covasim, Sciris is currently used by a number of other scientific software tools, such as [Optima HIV](https://github.com/optimamodel/optima) [@kerr2015optima], [Optima Nutrition](https://github.com/optimamodel/nutrition) [@pearson2018optima], the [Cascade Analysis Tool](https://cascade.tools) [@kedziora2019cascade], [Atomica](https://atomica.tools) [@atomica], Optima TB [@gosce2021optima], the [Health Interventions Prioritization Tool](http://hiptool.org) [@fraser2021using], [SynthPops](https://synthpops.org) [@synthpops], and [FPsim](https://fpsim.org) [@o2022fpsim].
-
-
 # Examples of key features
 
-Here we illustrate a smattering of key features in greater detail; further information can be found at [docs.sciris.org](https://docs.sciris.org). \autoref{fig:block-diagram} illustrates the functional modules of Sciris. Sciris is available on pip (`pip install sciris`).
+Here we illustrate a smattering of key features in greater detail; further information on installation and usage can be found at [docs.sciris.org](https://docs.sciris.org). \autoref{fig:block-diagram} illustrates the functional modules of Sciris. Sciris is available on pip (`pip install sciris`).
 
 ![Block diagram of Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly performed in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=100% }
 
@@ -173,7 +158,7 @@ A frequent hurdle scientists face is parallelization. Sciris provides `sc.parall
 ```
 
 ## Plotting
-Numerous shortcuts for customizing and prettifying plots are available in Sciris; several commonly used features are illustrated below, with the results shown in \autoref{fig:plotting-example}:
+Numerous shortcuts for customizing and prettifying plots are available in Sciris. Several commonly used features are illustrated below, with the results shown in \autoref{fig:plotting-example}:
 
 ```Python
 > sc.options(font='Garamond') # Set custom font
