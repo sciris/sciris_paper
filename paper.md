@@ -16,26 +16,26 @@ authors:
     affiliation: "1, 2" 
   - name: Paula Sanz-Leon
     orcid: 0000-0002-1545-6380
-    affiliation: "1, 3"
+    affiliation: "1"
   - name: Romesh G. Abeysuriya
     orcid: 0000-0002-9618-6457
-    affiliation: "1, 4"
+    affiliation: "1, 3"
   - name: George L. Chadderdon
     orcid: 0000-0002-3034-2330
-    affiliation: "4, 5"
+    affiliation: "3, 4"
   - name: Vlad-Ştefan Harbuz
-    affiliation: 6
+    affiliation: 5
   - name: Parham Saidi
-    affiliation: 6
+    affiliation: 5
   - name: Maria del Mar Quiroga
     orcid: 0000-0002-8943-2808
-    affiliation: 4
+    affiliation: "3, 6"
   - name: Rowan Martin-Hughes
     orcid: 0000-0002-3724-2412
-    affiliation: 4
+    affiliation: 3
   - name: Sherrie L. Kelly
     orcid: Sherrie Kelly
-    affiliation: 4
+    affiliation: 3
   - name: Jamie A. Cohen
     orcid: 0000-0002-8479-1860
     affiliation: 1
@@ -50,20 +50,20 @@ affiliations:
    index: 1
  - name: School of Physics, University of Sydney, Sydney, Australia
    index: 2
- - name: QIMR Berghofer Medical Research Institute, Brisbane, Australia
-   index: 3
  - name: Burnet Institute, Melbourne, Australia 
-   index: 4
+   index: 3
  - name: CAE USA, Tampa, USA
-   index: 5
+   index: 4
  - name: Saffron Software, Bucharest, Romania
+   index: 5
+ - name: Melbourne Data Analytics Platform, The University of Melbourne, Melbourne, Australia
    index: 6
  - name: Department of Mathematical Sciences, University of Copenhagen, Copenhagen, Denmark
    index: 7
  - name: Google, Zürich, Switzerland
    index: 8
 
-date: 4 December 2022
+date: 5 December 2022
 bibliography: paper.bib
 
 
