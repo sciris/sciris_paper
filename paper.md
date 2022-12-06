@@ -27,8 +27,6 @@ authors:
     affiliation: 6
   - name: Parham Saidi
     affiliation: 6
-  - name: James Jansson
-    affiliation: 4
   - name: Maria del Mar Quiroga
     orcid: 0000-0002-8943-2808
     affiliation: 4
