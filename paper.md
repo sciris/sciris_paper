@@ -137,7 +137,7 @@ In addition to Covasim, Sciris is currently used by a number of other scientific
 
 Here we illustrate a smattering of key features in greater detail; further information can be found at [docs.sciris.org](https://docs.sciris.org). \autoref{fig:block-diagram} illustrates the functional modules of Sciris. Sciris is available on pip (`pip install sciris`).
 
-![Block diagram of the Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly performed in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=100% }
+![Block diagram of Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly performed in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=100% }
 
 ## High-performance containers
 One of the key features in Sciris is `sc.odict`, a flexible container representing an associative array with the best-of-all-worlds features of lists, dictionaries, and numeric arrays. This is based on `OrderedDict` from [`collections`](https://docs.python.org/3/library/collections.html), but supports list methods like integer indexing, key slicing, and item insertion:
