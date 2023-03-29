@@ -63,7 +63,7 @@ affiliations:
  - name: Google, Zürich, Switzerland
    index: 8
 
-date: 5 December 2022
+date: 30 March 2023
 bibliography: paper.bib
 
 ---
@@ -181,7 +181,7 @@ sc.boxoff() # Remove the top and right axis spines
 
 # ScirisWeb
 
-While a full description of [ScirisWeb](http://github.com/sciris/scirisweb) is beyond the scope of this paper, briefly, it builds on Sciris to enable the rapid development of Python-based webapps, including those powering [Covasim](https://app.covasim.org) and [Optima Nutrition](https://nutrition.optimamodel.com). By default, ScirisWeb uses [Vuejs](https://vuejs.org) and [sciris-js](https://github.com/sciris/sciris-js) for the frontend, [Flask](https://flask.palletsprojects.com) as the web framework, [Redis](https://redis.io) for the (optional) database, and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. However, ScirisWeb is completely modular, which means that it could also be used to (for example) link a [React](https://reactjs.org/) frontend to a [MySQL](https://www.mysql.com/) database with [Plotly](https://plotly.com/) figures. This modularity is in contrast to full-stack solutions such as [Plotly Dash](https://github.com/plotly/dash), [Streamlit](https://streamlit.io), and [Voilà](https://voila.readthedocs.io). While these libraries are even easier to use than ScirisWeb (since they do not require any knowledge of JavaScript), they provide limited options for customization or switching between technology stacks. In contrast, ScirisWeb provides the flexibility of a custom-written webapp within the context of an "it just works" framework.
+While a full description of [ScirisWeb](http://github.com/sciris/scirisweb) is beyond the scope of this paper, briefly, it builds on Sciris to enable the rapid development of Python-based webapps, including those powering [Covasim](https://app.covasim.org) and [Optima Nutrition](https://nutrition.optimamodel.com). By default, ScirisWeb uses [Vuejs](https://vuejs.org) and [sciris-js](https://github.com/sciris/sciris-js) for the frontend, [Flask](https://flask.palletsprojects.com) as the web framework, [Redis](https://redis.io) for the (optional) database, and Matplotlib/[mpld3](https://github.com/mpld3/mpld3) for plotting. However, ScirisWeb is completely modular, which means that it could also be used to (for example) link a [React](https://reactjs.org/) frontend to a [MySQL](https://www.mysql.com/) database with [Plotly](https://plotly.com/) figures. This modularity is in contrast to full-stack solutions such as [Shiny for Python](https://shiny.rstudio.com/py/), [Plotly Dash](https://github.com/plotly/dash), [Streamlit](https://streamlit.io), and [Voilà](https://voila.readthedocs.io). While these libraries are even easier to use than ScirisWeb (since they do not require any knowledge of JavaScript), they provide limited options for customization or switching between technology stacks. In contrast, ScirisWeb provides the flexibility of a custom-written webapp within the context of an "it just works" framework.
 
 
 # Acknowledgements
