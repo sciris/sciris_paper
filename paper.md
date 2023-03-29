@@ -128,48 +128,52 @@ Here we illustrate a smattering of key features in greater detail; further infor
 One of the key features in Sciris is `sc.odict`, a flexible container representing an associative array with the best-of-all-worlds features of lists, dictionaries, and numeric arrays. This is based on `OrderedDict` from [`collections`](https://docs.python.org/3/library/collections.html), but supports list methods like integer indexing, key slicing, and item insertion:
 
 ```Python
-> data = sc.odict(a=[1,2,3], b=[4,5,6]) 
-> data['a'] == data[0]
-> data[:].sum() == 21
-> for i, key, value in data.enumitems():
-     print(f'Item {i} is named "{key}" and has value {value}')
-Item 0 is named "a" and has value [1, 2, 3]
-Item 1 is named "b" and has value [4, 5, 6]
+data = sc.odict(a=[1,2,3], b=[4,5,6]) 
+data['a'] == data[0]
+data[:].sum() == 21
+for i, key, value in data.enumitems():
+  print(f'Item {i} is named "{key}" and has value {value}')
+# Output:
+# Item 0 is named "a" and has value [1, 2, 3]
+# Item 1 is named "b" and has value [4, 5, 6]
 ```
 
 ## Numerical utilities
 Indexing arrays is a common task in NumPy, but can be difficult due to incompatibilities of object type. `sc.findinds` will find matches even if two things are not exactly equal due to differences in type (e.g., floats vs. integers, lists vs. arrays). The code shown below produces the same result as calling `np.nonzero(np.isclose(arr, val))[0].`
+
 ```Python
-> sc.findinds([2,3,6,3], 3.0) 
-array([1,3])
+sc.findinds([2,3,6,3], 3.0) 
+# Output:
+# array([1,3])
 ```
 
 ## Parallelization
 A frequent hurdle scientists face is parallelization. Sciris provides `sc.parallelize`, which acts as a shortcut for using `multiprocess.Pool()`. By default it adjusts the pool size based on the CPUs available, but can also use either a fixed number of CPUs or allocate them dynamically based on load (`sc.loadbalancer`). This example shows three equivalent ways to iterate over multiple complex arguments:
-```Python
-> def f(x, y):
->     return x*y
 
-> out1 = sc.parallelize(func=f, iterarg=[(1,2),(2,3),(3,4)])
-> out2 = sc.parallelize(func=f, iterkwargs={'x':[1,2,3], 'y':[2,3,4]})
-> out3 = sc.parallelize(func=f, iterkwargs=[{'x':1, 'y':2}, 
-                                            {'x':2, 'y':3}, 
-                                            {'x':3, 'y':4}])
+```Python
+def f(x, y):
+   return x*y
+
+out1 = sc.parallelize(func=f, iterarg=[(1,2),(2,3),(3,4)])
+out2 = sc.parallelize(func=f, iterkwargs={'x':[1,2,3], 'y':[2,3,4]})
+out3 = sc.parallelize(func=f, iterkwargs=[{'x':1, 'y':2}, 
+                                         {'x':2, 'y':3}, 
+                                         {'x':3, 'y':4}])
 ```
 
 ## Plotting
 Numerous shortcuts for customizing and prettifying plots are available in Sciris. Several commonly used features are illustrated below, with the results shown in \autoref{fig:plotting-example}:
 
 ```Python
-> sc.options(font='Garamond') # Set custom font
-> x = sc.daterange('2022-06-01', '2022-12-31', as_date=True) # Create dates
-> y = sc.smooth(np.random.randn(len(x))**2)*1000 # Create smoothed random numbers
-> c = sc.vectocolor(y, cmap='turbo') # Set colors proportional to y values
-> plt.scatter(x, y, c=c) # Plot the data
-> sc.dateformatter() # Automatic x-axis date formatter
-> sc.commaticks() # Add commas to y-axis tick labels
-> sc.setylim() # Automatically set the y-axis limits
-> sc.boxoff() # Remove the top and right axis spines
+sc.options(font='Garamond') # Set custom font
+x = sc.daterange('2022-06-01', '2022-12-31', as_date=True) # Create dates
+y = sc.smooth(np.random.randn(len(x))**2)*1000 # Create smoothed random numbers
+c = sc.vectocolor(y, cmap='turbo') # Set colors proportional to y values
+plt.scatter(x, y, c=c) # Plot the data
+sc.dateformatter() # Automatic x-axis date formatter
+sc.commaticks() # Add commas to y-axis tick labels
+sc.setylim() # Automatically set the y-axis limits
+sc.boxoff() # Remove the top and right axis spines
 ```
 
 ![Example of plot customizations via Sciris, including x- and y-axis tick labels and the font.\label{fig:plotting-example}](figures/plotting-example.png){ width=70% }
