@@ -5,8 +5,8 @@ tags:
   - python
   - scientific software development
   - computational science
-  - high-performance containers
   - numerical utilities
+  - containers
   - plotting
 
 authors:
@@ -98,7 +98,7 @@ Compared with a domain-specific language like MATLAB, even relatively simple sci
 
 For example, imagine that we wish to sample random numbers from a user-defined function with varying noise levels, save the intermediate calculations, and plot the results. In vanilla Python, each of these operations is somewhat cumbersome. \autoref{fig:showcase-code} presents two functionally identical scripts; the one written with Sciris is considerably more readable and succinct. 
 
-This vignette illustrates many of Sciris' most-used features, including timing, parallelization, high-performance containers, file saving and loading, and plotting. For the lines of the script that differ, Sciris reduces the number of lines of code required from 33 to 7, a 79% decrease.
+This vignette illustrates many of Sciris' most-used features, including timing, parallelization, feature-rich containers, file saving and loading, and plotting. For the lines of the script that differ, Sciris reduces the number of lines of code required from 33 to 7, a 79% decrease.
 
 ![Comparison of functionally identical scripts without Sciris (left) and with Sciris (right), showing a nearly five-fold reduction in lines of code required (excluding whitespace, comments, and the shared "wave generator" code), from 33 lines to 7. The resulting plots are shown in \autoref{fig:showcase-output}. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
 
@@ -124,7 +124,7 @@ Here we illustrate a smattering of key features in greater detail; further infor
 
 ![Block diagram of Sciris' functionality, grouped by high-level concepts and types of tasks that are commonly performed in scientific code.\label{fig:block-diagram}](figures/sciris-block-diagram-03.png){ width=100% }
 
-## High-performance containers
+## Feature-rich containers
 One of the key features in Sciris is `sc.odict`, a flexible container representing an associative array with the best-of-all-worlds features of lists, dictionaries, and numeric arrays. This is based on `OrderedDict` from [`collections`](https://docs.python.org/3/library/collections.html), but supports list methods like integer indexing, key slicing, and item insertion:
 
 ```Python
