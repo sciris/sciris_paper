@@ -100,7 +100,7 @@ For example, imagine that we wish to sample random numbers from a user-defined f
 
 This vignette illustrates many of Sciris' most-used features, including timing, parallelization, high-performance containers, file saving and loading, and plotting. For the lines of the script that differ, Sciris reduces the number of lines of code required from 33 to 7, a 79% decrease.
 
-![Comparison of functionally identical scripts without Sciris (left) and with Sciris (right), showing a nearly five-fold reduction in lines of code. The resulting plots are shown in \autoref{fig:showcase-output}. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
+![Comparison of functionally identical scripts without Sciris (left) and with Sciris (right), showing a nearly five-fold reduction in lines of code required (excluding whitespace, comments, and the shared "wave generator" code), from 33 lines to 7. The resulting plots are shown in \autoref{fig:showcase-output}. \label{fig:showcase-code}](figures/sciris-showcase-code.png){ width=100% }
 
 ![Output of the scripts shown in \autoref{fig:showcase-code}, without Sciris (left) and with Sciris (right). The two plots are identical except for the new high-contrast colormap available in Sciris. \label{fig:showcase-output}](figures/sciris-showcase-output.png){ width=100% }
 
