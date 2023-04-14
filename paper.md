@@ -129,8 +129,8 @@ One of the key features in Sciris is `sc.odict`, a flexible container representi
 
 ```Python
 data = sc.odict(a=[1,2,3], b=[4,5,6]) 
-data['a'] == data[0]
-data[:].sum() == 21
+assert data['a'] == data[0]
+assert data[:].sum() == 21
 for i, key, value in data.enumitems():
   print(f'Item {i} is named "{key}" and has value {value}')
 # Output:
